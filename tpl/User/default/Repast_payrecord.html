@@ -1,0 +1,127 @@
+<if condition="$ischild neq 1">
+<include file="Public:head" />
+<else />
+<include file="Repast:head" />
+</if>
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+        <div class="content">
+<div class="cLineB">
+<h4 class="left">充值记录({pigcms:$page}) </h4>
+<div class="searchbar right">
+<!-- <form method="post" action="">
+<input type="text" id="msgSearchInput" class="txt left" placeholder="输入订购人名字搜索" name="searchkey" value="">
+<input type="hidden" name="ac" value="hotels-list">
+<input type="hidden" name="id" value="9878">
+<input type="hidden" name="wxid" value="gh_423dwjkewad">
+<input type="submit" value="搜索" id="msgSearchBtn" href="" class="btnGrayS" title="搜索">
+</form> -->
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+</div>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<if condition="$ischild neq 1"> <li class="tabli" id="tab0"><a href="{pigcms::U('Repast/company_index', array('token' => $token,'cid' => $cid))}">店面管理</a></li></if>
+<li class="tabli" id="tab2"><a href="{pigcms::U('Repast/sort', array('token' => $token,'cid' => $cid))}">分类管理</a></li>
+<li class="tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">预约管理</a></li>
+<li class="tabli" id="tab4"><a href="{pigcms::U('Repast/dishpak', array('token' => $token,'cid' => $cid))}">套餐管理</a></li>
+<li class="tabli" id="tab5"><a href="{pigcms::U('Repast/orders', array('token' => $token,'cid' => $cid))}">订单管理</a></li>
+<li class="current tabli" id="tab6"><a href="{pigcms::U('Repast/payrecord', array('token' => $token,'cid' => $cid))}">交易记录</a></li>
+<li class="tabli" id="tab6"><a href="{pigcms::U('Repast/taorecord', array('token' => $token,'cid' => $cid))}">套餐记录</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<div class="cLine">
+<!-- <div class="pageNavigator left"> <a href="###" onclick="$('#info').submit()" title="" class="btnGrayS vm bigbtn"><img src="{pigcms::RES}/images/product/arrow_switch.png" class="vm">处理订单</a></div> -->
+<div class="clr"></div>
+</div>
+
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th class="select"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+<th width="200">名称</th>
+<th width="130">时间</th>
+<th width="70">金额</th>
+<th width="90">姓名</th>
+<th width="90">手机</th>
+<th width="100">车牌</th>
+<th class="60">状态</th>
+<th class="100">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="re" >
+<tr>
+<td><input type="checkbox" value="{pigcms:$o.id}" class="cbitem" name="id_{pigcms:$i}"></td>
+<td><if condition="re.adminname neq ''">
+                     {pigcms:$re.adminname}
+                   </if>
+                   {pigcms:$re.ordername}</td>
+<td>{pigcms:$re.createtime|date="Y-m-d H:i",###}</td>
+<td><if condition="$re['type'] eq 1">+<else />-</if>{pigcms:$re.price}</td>
+<td>{pigcms:$re.truename}</td>
+<td>{pigcms:$re.tel}</td>
+<td> <volist name="re.carinfolist" id="row">{pigcms:$row.carnumber} <if condition="$key gt 1"><br/></if></volist></td>
+<td><if condition="$re['paid'] eq 1"><span style="color:green">成功</span><else /><a style="color:red" href="/index.php?g=Wap&m=Card&a=payAction&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}&orderid={pigcms:$re.orderid}">待付</a></if></td>
+<TD>{pigcms:$re.des}</TD>
+</tr>
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{pigcms:$_GET['token']}" />
+</form>
+
+<script>
+function showIntroDetail(id){
+	art.dialog.open('{pigcms::U('Repast/orderInfo',array('token'=>$token,'dining'=>$isDining))}&id='+id,{lock:false,title:'订单详情',width:1000,height:620,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{pigcms:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+function change(obj) {
+	location.href = "{pigcms::U('Repast/orders',array('token' => $token, 'cid' => $cid))}&status=" + $(obj).val();
+}
+</script>
+<include file="Public:footer"/>

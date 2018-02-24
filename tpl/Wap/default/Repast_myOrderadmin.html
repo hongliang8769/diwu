@@ -1,0 +1,130 @@
+<include file="Repast:header"/>
+<body id="page_intelOrder" class="myOrderCon">
+
+<div style="float:none;width:100%;" class="headselect">
+	<a class="link_tel icon-phone">预约管理</a>
+</div>
+<div class="container" style="padding:0;">
+<br/>
+<header id="container">
+<!--	<div>
+	    <select class="select_orderType" onchange="orderList(this);">
+	        <option value="0" <php>if ($status == 0) {echo "selected";}</php> >全部状态</option>
+	        <option value="1" <php>if ($status == 1) {echo "selected";}</php> >未付款</option>
+	        <option value="3" <php>if ($status == 3) {echo "selected";}</php> >已付款</option>
+	    </select>
+	</div>-->
+	<div style="padding:10px 0; margin-bottom:10px;">
+		<ul class="list_order" id='list'>
+			<volist name="orderList" id="order" empty="暂时没有数据！">
+			<li>
+				<label style="float:none; color:#000; padding:1px 1px; margin-top:0;" onclick="this.classList.toggle('on');">车牌:{pigcms:$order.carnumber}&nbsp;时间:{pigcms:$order.reservetime|date="m-d",###}&nbsp;<if condition="$order.timezone eq '12:00'">上午 <elseif condition="$order.timezone eq '20:00'"/>下午<else />{pigcms:$order.timezone}</if>&nbsp;状态:<span style="color:#F63;"><if condition="$order.paid eq 1">已支付<else/>未支付</if></span></label>
+				<ol style="margin:10px 0;">
+
+					<table style="color:#000;">
+						<if condition="empty($order['info']) eq true">
+							
+						<else />
+						<thead>
+						
+                            <tr>
+							    <td colspan="4"><span style="font-size:16px;">{pigcms:$order.name}</span><br/>订单号：{pigcms:$order.orderid}</td>
+							</tr>
+							<tr>
+							    <td style="width:33%">项目</td>
+								<td style="width:33%">价格</td>
+							    <td>数量</td>
+                                <td>备注</td>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="order['info']['list']" id="row">
+						<tr>
+							<td>{pigcms:$row.name}</td>
+							<td>{pigcms:$row.oldprice}元</td>
+							<td>{pigcms:$row.num}次</td>
+                            <td>{pigcms:$row.des}</td>
+   						</tr>
+						</volist>
+						</tbody>
+ 						<tfoot>
+						<tr>
+							<td colspan="4" style="text-align:right;">
+									<label style="float:none;"><span style=" font-size:12px; font-weight:normal;color:#000; ">总金额：</span><span  style="text-decoration:line-through;font-size:14px; font-weight:normal;color:#000;">{pigcms:$order.oldprice}元</span>&nbsp;&nbsp;</label><br/>
+                                <label style="float:none;"><span style=" font-size:12px; font-weight:normal;color:#000;">会员价：</span><span class="red h5">{pigcms:$order.price}元</span>&nbsp;&nbsp;</label>
+							</td>
+						</tr>
+						</tfoot>
+						</if>
+					</table>
+                    <footer>
+                <if condition="$order.paid neq 1">
+                <table>
+                <tr> 
+                <td style="border:none;background:none;width:50%;" colspan="2" ><input type="button" value="取消" name="cancal" class="btn_2" style="width:60%;"><input type="hidden" name="oid" value="{pigcms:$order.id}" /><input type="hidden" name="dishtimeid" value="{pigcms:$order.dishtimeid}" /><input type="hidden" name="dishtimeorder" value="{pigcms:$order.dishtimeorder}" /></td>
+				</tr>
+                </table></if>
+            	</footer>
+				</ol>
+			</li>
+			</volist>
+		</ul>
+        <div class="pages" style="text-align:right;  height:80px;line-height:30px; padding-top:20px;">{pigcms:$page}</div>
+	</div>
+</header>
+</div>
+<style>
+#footer_menu {position: fixed;}
+.list_order li>label:after{right: 5px;}
+</style>
+<if condition="$isadmin.level gt 0">
+<include file="Repast:footeradmin"/>
+<else/>
+<include file="Repast:footer"/>
+</if>
+<script>
+$(function() {	
+    var min_height = $(document).height() - 80;
+    $("#container").css({"min-height":min_height});
+	$("input[name='cancal']").click(function() {	
+		var oid=$(this).next("input[name='oid']").val();
+		var dishtimeid=$(this).nextAll("input[name='dishtimeid']").val();
+		var dishtimeorder=$(this).nextAll("input[name='dishtimeorder']").val();
+		
+	   MDialog.confirm('', '是否取消订单？', null,
+		'确定', function() {
+			location.href="{pigcms::U('Repast/deleteOrder', array('token'=>$token, 'wecha_id'=>$wecha_id, 'cid'=>$cid))}"+"&id=" + oid+"&dishtimeid=" + dishtimeid+"&dishtimeorder=" + dishtimeorder;	
+		}, null, '取消', null, null, null, true, true);
+	});
+	$("input[name='pay']").click(function() {	
+		var orderid=$(this).next("input[name='orderid']").val();
+		var price=$(this).nextAll("input[name='price']").val();
+		var itemname=$(this).nextAll("input[name='itemname']").val();
+		MDialog.confirm('', '请选择支付方式？', null,
+			'余额支付', function() {
+				location.href = "{pigcms::U('CardPay/pay',array('token'=>$token,'wecha_id'=>$wecha_id,'success'=>1,'from'=> 'Repast'))}" + '&orderName=' + itemname + '&single_orderid=' + orderid + '&price=' + price;
+			}, null, '微信支付', function() {
+				location.href = "{pigcms::U('Repast/weixinpay',array('token'=>$token,'wecha_id'=>$wecha_id,'success'=>1,'from'=> 'Repast'))}" + '&orderName=' + itemname + '&single_orderid=' + orderid + '&price=' + price;
+			}, null, null, true, true);
+    });
+});
+
+function orderList(obj) {
+	location.href = "{pigcms::U('Repast/myOrder', array('token'=>$token, 'wecha_id'=>$wecha_id, 'cid'=>$cid))}&status=" + $(obj).val();
+}
+</script>
+</body>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Repast",
+            "moduleID":"0",
+            "imgUrl": "", 
+            "timeLineLink": "{pigcms::C('site_url') .  U('Repast/myOrder',array('token' => $_GET['token']))}",
+            "sendFriendLink": "{pigcms::C('site_url') .  U('Repast/myOrder',array('token' => $_GET['token']))}",
+            "weiboLink": "{pigcms::C('site_url') .  U('Repast/myOrder',array('token' => $_GET['token']))}",
+            "tTitle": "{pigcms:$metaTitle}",
+            "tContent": "{pigcms:$metaTitle}"
+        };
+</script>
+{pigcms:$shareScript}
+</html>

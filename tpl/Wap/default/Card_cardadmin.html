@@ -1,0 +1,206 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>管理中心-{pigcms:$isadmin.msg}</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::RES}/card/style/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script src="{pigcms::RES}/card/js/accordian.pack.js" type="text/javascript"></script>
+</head>
+<if condition="$error lt 0">
+  <body id="cardunion" onLoad="new Accordian(&#39;basic-accordian&#39;,5,&#39;header_highlight&#39;);" class="mode_webapp2">
+  <else/>
+  <body id="card" onLoad="new Accordian(&#39;basic-accordian&#39;,5,&#39;header_highlight&#39;);" class="mode_webapp">
+</if>
+<if condition="$error lt 0">
+  <div class="error" style="margin:50px auto 20px auto;text-align:center"><img src="{pigcms::RES}/card/images/error.jpg" /></div>
+  <div style="font-size:14px;text-align:center">
+    <php>if($error==-1){</php>
+    会员卡暂时缺货
+    <php>}elseif($error==-2){</php>
+    您的积分不够
+    <php>}elseif($error==-3){</php>
+    您要领取的会员卡类型是：{pigcms:$thisCard.cardname}<br>
+    需要{pigcms:$thisCard.miniscore}积分，且充值后的余额不少于{pigcms:$thisCard.minimomey}元，<br>
+    您目前积分：{pigcms:$userScore}，余额：{pigcms:$balance}元。
+    <php>}elseif($error==-4){</php>
+    还没领取会员卡，现正在跳转
+    <php>}elseif($error==-5){</php>
+    非管理员，无权限访问
+    <php>}elseif($error==-6){</php>
+    您必须输入一个以上汉字才能启动查询。
+    <php>}elseif($error==-7){</php>
+    您必须输入2个及2个以上数字或字母方能启动模糊查询功能。
+    <php>}</php>
+  </div>
+    <if condition="$isadmin.level gt 0">
+<include file="Card:bottomadmin"/>
+<else/>
+<include file="Card:bottom"/>
+</if>
+  <else/>
+  <div id="overlay"></div>
+  <div class="cardcenter">
+    <p class="explain"><span>{pigcms:$thisCard.msg}</span></p>
+  </div>
+  <style type="text/css">
+.window { width: 290px; position: absolute; display: none; bottom: 60px; left: 50%; z-index: 9999; margin: -50px auto 0 -145px; padding: 2px; border-radius: 0.6em; -webkit-border-radius: 0.6em; -moz-border-radius: 0.6em; background-color: #ffffff; -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); font: 14px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif; }
+.window .title { background-color: #A3A2A1; line-height: 26px; padding: 5px 5px 5px 10px; color: #ffffff; font-size: 16px; border-radius: 0.5em 0.5em 0 0; -webkit-border-radius: 0.5em 0.5em 0 0; -moz-border-radius: 0.5em 0.5em 0 0; background-image: -webkit-gradient(linear, left top, left bottom, from( #585858 ), to( #565656 )); /* Saf4+, Chrome */ background-image: -webkit-linear-gradient(#585858, #565656); /* Chrome 10+, Saf5.1+ */ background-image: -moz-linear-gradient(#585858, #565656); /* FF3.6 */ background-image: -ms-linear-gradient(#585858, #565656); /* IE10 */ background-image: -o-linear-gradient(#585858, #565656); /* Opera 11.10+ */ background-image: linear-gradient(#585858, #565656); }
+.window .content { /*min-height:100px;*/ overflow: auto; padding: 10px; background: linear-gradient(#FBFBFB, #EEEEEE) repeat scroll 0 0 #FFF9DF; color: #222222; text-shadow: 0 1px 0 #FFFFFF; border-radius: 0 0 0.6em 0.6em; -webkit-border-radius: 0 0 0.6em 0.6em; -moz-border-radius: 0 0 0.6em 0.6em; }
+.window #txt { min-height: 30px; font-size: 16px; line-height: 22px; }
+.window .txtbtn { background: #f1f1f1; background-image: -webkit-gradient(linear, left top, left bottom, from( #DCDCDC ), to( #f1f1f1 )); /* Saf4+, Chrome */ background-image: -webkit-linear-gradient( #ffffff, #DCDCDC ); /* Chrome 10+, Saf5.1+ */ background-image: -moz-linear-gradient( #ffffff, #DCDCDC ); /* FF3.6 */ background-image: -ms-linear-gradient( #ffffff, #DCDCDC ); /* IE10 */ background-image: -o-linear-gradient( #ffffff, #DCDCDC ); /* Opera 11.10+ */ background-image: linear-gradient( #ffffff, #DCDCDC ); border: 1px solid #CCCCCC; border-bottom: 1px solid #B4B4B4; color: #555555; font-weight: bold; text-shadow: 0 1px 0 #FFFFFF; border-radius: 0.6em 0.6em 0.6em 0.6em; display: block; width: 100%; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); text-overflow: ellipsis; white-space: nowrap; cursor: pointer; text-align: windowcenter; font-weight: bold; font-size: 18px; padding: 6px; margin: 10px 0 0 0; }
+.window .txtbtn:visited { background-image: -webkit-gradient(linear, left top, left bottom, from( #ffffff ), to( #cccccc )); /* Saf4+, Chrome */ background-image: -webkit-linear-gradient( #ffffff, #cccccc ); /* Chrome 10+, Saf5.1+ */ background-image: -moz-linear-gradient( #ffffff, #cccccc ); /* FF3.6 */ background-image: -ms-linear-gradient( #ffffff, #cccccc ); /* IE10 */ background-image: -o-linear-gradient( #ffffff, #cccccc ); /* Opera 11.10+ */ background-image: linear-gradient( #ffffff, #cccccc ); }
+.window .txtbtn:hover { background-image: -webkit-gradient(linear, left top, left bottom, from( #ffffff ), to( #cccccc )); /* Saf4+, Chrome */ background-image: -webkit-linear-gradient( #ffffff, #cccccc ); /* Chrome 10+, Saf5.1+ */ background-image: -moz-linear-gradient( #ffffff, #cccccc ); /* FF3.6 */ background-image: -ms-linear-gradient( #ffffff, #cccccc ); /* IE10 */ background-image: -o-linear-gradient( #ffffff, #cccccc ); /* Opera 11.10+ */ background-image: linear-gradient( #ffffff, #cccccc ); }
+.window .txtbtn:active { background-image: -webkit-gradient(linear, left top, left bottom, from( #cccccc ), to( #ffffff )); /* Saf4+, Chrome */ background-image: -webkit-linear-gradient( #cccccc, #ffffff ); /* Chrome 10+, Saf5.1+ */ background-image: -moz-linear-gradient( #cccccc, #ffffff ); /* FF3.6 */ background-image: -ms-linear-gradient( #cccccc, #ffffff ); /* IE10 */ background-image: -o-linear-gradient( #cccccc, #ffffff ); /* Opera 11.10+ */ background-image: linear-gradient( #cccccc, #ffffff ); border: 1px solid #C9C9C9; border-top: 1px solid #B4B4B4; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset; }
+.window .title .close { float: right; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVEhL7dNtCoAgDAZgb60nsGN1tPLVCVNHmg76kQ8E1mwv+GG27cestQ4PvTZ69SFocBGpWa8+zHt/Up+IN+MhgLlUmnIE1CpBQB2COZibfpnXhHFaIZkYph0SOeeK/QJ8o7KOek84fkCWSBtfL+Ny2MPpCkPFMH6PWEhWhKncIyEk69VfiUuVhqJefds+YcwNbEwxGqGIFWYAAAAASUVORK5CYII="); width: 26px; height: 26px; display: block; }
+</style>
+  <div class="cardexplain" >
+    <style>
+		.button{width:100%;margin-bottom:10px;}
+		.button .b1,.button .b2{width:49%;text-align:center;font-weight:bold;text-align:center;line-height:40px;background:#1cc200; border: 1px solid #179f00;border-radius: 5px;color:#fff;}
+		.button a:hover{background:#179f00}
+		.button .b1{margin-right:2px;float:left;}
+		.button .b2{float:right;}
+		.integral_table td.nx{width:45%; text-align:right;}
+		.integral_table td.yx{width:55%; text-align:left; padding-left:3px;}
+		.tdtitle td{border-bottom:none;}
+		.ui-btn-inner{padding:0.3em 20px;}
+		.ui-grid-a .ui-btn{ margin-right:0;}
+</style>
+    <div class="jifen-box" style="margin-bottom:0;">
+      <ul class="zongjifen">
+        <li>
+          <div class="fengexian">
+            <p>会员总数</p>
+            <span>{pigcms:$totalMember}/{pigcms:$totaluser}个</span></div>
+          </li>
+        <li>
+          <div class="fengexian">
+            <p>今日消费</p>
+            <span>{pigcms:$totalpay}元</span></div>
+          </li>
+        <li>
+          <p>今日充值</p>
+          <span>{pigcms:$totalchong}元</span></li>
+      </ul>
+      <div class="clr"></div>
+    </div>  
+    <!-- <div class="button"><a href="#" class="b1"id="showform" style="width:100%;">查询</a>
+      <div class="clr"></div>
+    </div>-->
+    <form method="post" action="{pigcms::U('Card/cardadmin',array('token'=>$token,'wecha_id'=>$wecha_id))}"data-ajax="false" style="margin-bottom:0;">
+      <div class="ui-grid-a">
+          <div class="ui-block-a" style="width:70%;">
+     	   <input type="search" name="search" id="search" value="{pigcms:$search}" placeholder="搜索内容..." style="font-size:14px;">
+          </div>
+           <div class="ui-block-b" style="width:30%;">
+           <input type="submit" value="开始"  >
+          </div> 
+       </div> 
+ </form>
+     <div id="basic-accordian" style="margin:0 0 9px;">
+      <volist id="item" name="allCard">
+        <div id="test{pigcms:$key+1}-header" class="accordion_headings" style=" margin-bottom:1px;">
+          <div class="tab cardinfo" style="background-image:url('{pigcms:$item.cardimg}');"><span class="title">
+           <table width="100%" border="0" cellpadding="0" cellspacing="0" class="integral_table tdtitle">
+              <TR>
+                <TD style="text-align:left; width:20%;">{pigcms:$item.truename}</TD>
+                <TD style="text-align:left;width:30%;">{pigcms:$item.carnumber}</TD>
+                <TD style="text-align:left;width:60%;">{pigcms:$item.tel}</TD>
+              </TR>
+            </TABLE>
+            </span></div>
+          <div id="test{pigcms:$key+1}-content" style="display: block; overflow: hidden; opacity: 1;">
+            <div class="accordion_child">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="integral_table">
+                <tbody>
+                <TR>
+                  <TD class="nx">卡类型：</TD>
+                  <TD class="yx">{pigcms:$item.cardname}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">卡号：</TD>
+                  <TD class="yx">{pigcms:$item.number}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">车型：</TD>
+                  <TD class="yx">{pigcms:$item.cartype}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">领卡时间：</TD>
+                  <TD class="yx">{pigcms:$item.getcardtime|date='Y-m-d',###}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">积分：</TD>
+                  <TD class="yx">{pigcms:$item.total_score}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">消费：</TD>
+                  <TD class="yx">{pigcms:$item.expensetotal}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">余额：</TD>
+                  <TD class="yx">{pigcms:$item.balance}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">小区：</TD>
+                  <TD class="yx">{pigcms:$item.address}</TD>
+                </TR>
+                <TR>
+                  <TD class="nx">备注：</TD>
+                  <TD class="yx">{pigcms:$item.beizhu}</TD>
+                </TR>
+                </tbody>
+              </TABLE>
+            </div>
+            <if condition="$item['cardid'] gt 0">
+             <div class="accordion_child" style="background:#FFF; padding:15px 0;">
+           
+            <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+  <a href="{pigcms::U('Userinfo/indexadmin',array('token'=>$token,'wecha_id'=>$wecha_id,'user_wecha_id'=>$item['wecha_id'],'cardid'=>$item['cardid'],'redirect'=>'Card/cardadmin|token:'.$token.',wecha_id:'.$wecha_id))}" rel="external" data-role="button" data-mini="true">修改资料</a>
+   <a href="{pigcms::U('Card/topayadmin',array('token'=>$token,'user_wecha_id'=>$item['wecha_id'],'wecha_id'=>$wecha_id,'uid'=>$item['uid'],'cardid'=>$item['cardid'],'redirect'=>'Card/cardadmin|token:'.$token.',wecha_id:'.$wecha_id))}"  rel="external" data-role="button" data-mini="true">充值</a>
+   <a href="{pigcms::U('Card/consumeadmin',array('token'=>$token,'user_wecha_id'=>$item['wecha_id'],'wecha_id'=>$wecha_id,'uid'=>$item['uid'],'cardid'=>$item['cardid'],'redirect'=>'Card/cardadmin|token:'.$token.',wecha_id:'.$wecha_id))}"  rel="external" data-role="button" data-mini="true">消费</a>
+   <a href="{pigcms::U('Repast/dishadmin',array('token'=>$token,'user_wecha_id'=>$item['wecha_id'],'wecha_id'=>$wecha_id,'uid'=>$item['uid'],'cardid'=>$item['cardid'],'redirect'=>'Card/cardadmin|token:'.$token.',wecha_id:'.$wecha_id))}"  rel="external" data-role="button" data-mini="true">下单</a>
+  <a href="/index.php?g=Wap&m=Card&a=payRecordadmin&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}&user_wecha_id={pigcms:$item['wecha_id']}&cardid={pigcms:$item['cardid']}" rel="external" data-role="button" data-mini="true">消费记录</a>
+</div>
+              </div>
+              <else/>
+             </if>
+          </div>
+        </div>
+      </volist>
+    </div>
+     <if condition="$search neq ''">
+    	<div class="pages" style="text-align:right; height:30px; line-height:30px;">{pigcms:$page}</div>
+    </if>
+    </ul>
+  </div>
+  <script type="text/javascript">
+jQuery(function($) {
+    (function() {
+	/*$("#windowclosebutton").click(function(){
+		  $("#info").submit();
+	});
+	$("#showform").click(function(){
+		  $("#windowcenter").show();
+	});
+	$("#windowclosebutton,#alertclose").click(function(){
+		  $("#windowcenter").hide();
+	});*/
+}());
+  
+});
+</script>
+  <if condition="$isadmin.level gt 0">
+<include file="Card:bottomadmin"/>
+<else/>
+<include file="Card:bottom"/>
+</if>
+  <include file="Card:share"/></if>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<include file="Public:head"/>  
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="{pigcms::RES}/js/cart/jscolor.js" type="text/javascript"></script>
+<div class="content">
+<div class="cLineB">
+<h4 class="left">会员卡</h4>
+<div class="searchbar right">
+</div>
+<div class="clr"></div>
+</div>
+<style>
+a.delete {
+    background: url(/tpl/User/default/common/images/icons/cross.png) no-repeat;
+    padding: 2px 0 2px 20px;
+}
+</style>
+<div class="cLine">
+<div class="pageNavigator left"> <a href='/index.php?g=User&m=Member_card&a=useredit&token={pigcms:$token}' title='新增会员' class='btnGrayS vm bigbtn'><img class="vm" src="./tpl/User/default/common/images/product/add.png">添加会员</a>&nbsp;&nbsp;&nbsp;<a href='/index.php?g=User&m=Member_card&a=design&token={pigcms:$token}' title='新增会员卡' class='btnGrayS vm bigbtn'><img class="vm" src="./tpl/User/default/common/images/product/add.png">添加会员卡</a>&nbsp;&nbsp;&nbsp;<a href="javascript:drop_confirm('确定解除全部会员绑定吗?其中包括了所以的卡类型的会员的绑定。\\n\\n为了避免意外，请先备份好数据库，务必谨慎操作！', '/index.php?g=User&m=Member_card&a=deleteallbang&token={pigcms:$token}');" title='解除全部会员的绑定' class='btnGrayS vm bigbtn' ><img class="vm" src="./tpl/User/default/common/images/icons/cross.png">解除全部会员绑定</a>&nbsp;&nbsp;&nbsp;<a href="javascript:drop_confirm('确定彻底删除全部非绑定会员吗?其中包含了导入的全部非绑定用户信息及关联信息，包括交易记录。\\n\\n为了避免意外，请先备份好数据库，务必谨慎操作！', '/index.php?g=User&m=Member_card&a=deletealluser&token={pigcms:$token}');" title='删除全部非绑定会员' class='btnGrayS vm bigbtn' ><img class="vm" src="./tpl/User/default/common/images/icons/cross.png">删除全部非绑定会员</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="$('#import').css('display','')" title='导入会员信息' class='btnGrayS vm bigbtn' ><img class="vm" src="./tpl/User/default/common/images/icons/arrow_refresh.png">导入会员信息</a>&nbsp;&nbsp;&nbsp;<a href="?g=User&m=Member_card&a=exportCard&id={pigcms:$Think.get.id|intval}" title='导出会员信息' class='btnGrayS vm bigbtn' ><img class="vm" src="./tpl/User/default/common/images/icons/world_go.png">导出会员信息</a>&nbsp;&nbsp;&nbsp;<a href="/index.php?g=User&m=Member_card&a=staff&token={pigcms:$token}&type=5" title='店员管理' class='btnGrayS vm bigbtn' ><img class="vm" src="./tpl/User/default/common/images/icons/world_go.png">店员管理</a></div>
+<div class="clr"></div>	
+			<div style="margin-top: 20px;display:none" id="import">
+				<form enctype="multipart/form-data" action="?g=User&amp;m=Upyun&amp;a=localUploadCardExcel" id="thumbForm" method="POST" style="font-size:14px;padding:10px 20px 10px 0px;">
+					<div>
+						选择本地文件：<input type="file" style="width:250px;border:1px solid #ddd" name="photo">
+						<input id="submitbtn" name="doSubmit" type="submit" class="btnGreen" value="上传" onclick="this.value='上传中...'">
+						<input name="id" type="hidden" value="{pigcms:$Think.get.id|intval}" />
+						<a href="###" onclick="$('#import').css('display','none')" class="btnGrayS vm">取消导入</a> 注意：不支持xlsx格式
+					</div>
+				</form>
+			</div>
+</div>
+<div class="msgWrap">
+ <div style="background:#fefbe4;border:1px solid #f3ecb9;color:#993300;padding:10px;margin-top:5px;">在这里可以添加多种级别的会员卡，比如：普通卡、银卡、金卡等，可以设置每个会员卡的最低积分要求，然会员根据不同的积分领取不同的卡</div>
+<form method="post"  action="" id="info" >
+<TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<THEAD>
+<tr>
+<th>名称</th>
+<th>最低充值要求</th>
+<th>折扣</th>
+<th width="100">总数</th>
+<th width="100">已开卡</th>
+<th class="norightborder">操作</th>
+</tr>
+</THEAD>
+<TBODY>
+<TR></TR>
+<volist id="item" name="cards">
+<TR>
+<TD>{pigcms:$item.cardname}</TD>
+<TD>{pigcms:$item.minimomey}元</TD>
+<TD>{pigcms:$item.discount}</TD>
+<TD>{pigcms:$item.cardcount}</TD>
+<TD>{pigcms:$item.usercount}</TD>
+<TD class="norightborder">
+
+<a href="{pigcms::U('Member_card/members', array('token' => $token,'id'=>$item['id']))}">会员卡管理</a> 
+|
+<a href="{pigcms::U('Member_card/notice', array('token' => $token,'id'=>$item['id']))}">会员通知</a>
+|
+<a href="{pigcms::U('Member_card/exchange', array('token' => $token,'id'=>$item['id']))}">积分设置</a> 
+|
+<a href="{pigcms::U('Member_card/create', array('token' => $token,'id'=>$item['id']))}">会员开卡</a> 
+|
+<a href="{pigcms::U('Member_card/design', array('token' => $token,'id'=>$item['id']))}">修改</a> 
+|
+<a href="javascript:drop_confirm('您确定要删除吗?\\n\\n此操作将解除{pigcms:$item.cardname}下的全部会员绑定。\\n\\n为了避免意外，请先备份好数据库，务必谨慎操作！', '/index.php?g=User&m=Member_card&a=deletecardbang&token={pigcms:$token}&id={pigcms:$item.id}');">解除会员绑定</a>
+|
+<a href="javascript:drop_confirm('您确定要删除吗?\\n\\n此操作将删除{pigcms:$item.cardname}下的全部绑定会员及关联信息，包括交易记录。\\n\\n为了避免意外，请先备份好数据库，务必谨慎操作！', '/index.php?g=User&m=Member_card&a=deletecardmember&token={pigcms:$token}&id={pigcms:$item.id}');">删除绑定会员</a>
+|
+<a href="javascript:drop_confirm('您确定要删除吗?\\n\\n此操作将删除{pigcms:$item.cardname}本身，及该卡下的全部绑定会员及关联信息，包括交易记录。\\n\\n为了避免意外，请先备份好数据库，务必谨慎操作！', '/index.php?g=User&m=Member_card&a=delete&token={pigcms:$token}&id={pigcms:$item.id}');">删除{pigcms:$item.cardname}</a></TD>
+</TR>
+</volist>
+</TBODY>
+</TABLE>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages"></div>
+</div>
+<div class="clr"></div>
+</div>
+</div>  
+        <div class="clr"></div>
+		<include file="Public:footer"/>
+      </div>
+    </div>
+  </div> 

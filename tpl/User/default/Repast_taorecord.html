@@ -1,0 +1,71 @@
+<if condition="$ischild neq 1">
+<include file="Public:head" />
+<else />
+<include file="Repast:head" />
+</if>
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+<div class="content">
+<div class="cLineB">
+<h4 class="left">套餐记录</h4>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<if condition="$ischild neq 1"> <li class="tabli" id="tab0"><a href="{pigcms::U('Repast/company_index', array('token' => $token,'cid' => $cid))}">店面管理</a></li></if>
+<li class="tabli" id="tab2"><a href="{pigcms::U('Repast/sort', array('token' => $token,'cid' => $cid))}">分类管理</a></li>
+<li class="tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">预约管理</a></li>
+<li class="tabli" id="tab4"><a href="{pigcms::U('Repast/dishpak', array('token' => $token,'cid' => $cid))}">套餐管理</a></li>
+<li class="tabli" id="tab5"><a href="{pigcms::U('Repast/orders', array('token' => $token,'cid' => $cid))}">订单管理</a></li>
+<li class="tabli" id="tab6"><a href="{pigcms::U('Repast/payrecord', array('token' => $token,'cid' => $cid))}">交易记录</a></li>
+<li class="current tabli" id="tab6"><a href="{pigcms::U('Repast/taorecord', array('token' => $token,'cid' => $cid))}">套餐记录</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="cLine">
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<THEAD>
+<tr>
+<th width="120">姓名</th>
+<th width="120">套餐名称</th>
+<th width="120">内容</th>
+<th width="50">购买时间</th>
+<th width="80">操作</th>
+</tr>
+</THEAD>
+<TBODY>
+<TR></TR>
+<volist  name="list" id="item" empty="暂时没有数据！">
+<TR>
+<TD>{pigcms:$item.truename}</TD>
+<TD>{pigcms:$item.name}</TD>
+<TD>
+<volist name="item['info']" id="row"> 
+	<if condition="$row.name neq '' ">
+    <p>{pigcms:$row.name}&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;">{pigcms:$row.num}次</font></p>
+    </if>
+ </volist>
+</TD>
+
+<TD>{pigcms:$item.add_time|date='Y-m-d H:i:s',###}</TD>
+<TD><a href="{pigcms::U('Repast/taorecordedit',array('token'=>$this->token,'wecha_id'=>$item['wecha_id'],'id'=>$item['id']))}"><strong>编辑</strong></a><br>
+<a href="javascript:drop_confirm('您确定要删除吗?\\n\\n此操作将删除套餐记录','/index.php?g=User&m=Repast&a=taorecorddel&token={pigcms:$Think.get.token}&id={pigcms:$item.id}&wecha_id={pigcms:$item.wecha_id}');"><strong>删除</strong></a>
+</TD>
+</TR>
+</volist>
+</TBODY>
+</TABLE>
+</form>
+
+</div>
+<div class="cLine">
+	<div class="pageNavigator right">
+		<div class="pages">{pigcms:$page}</div>
+	</div>
+	<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

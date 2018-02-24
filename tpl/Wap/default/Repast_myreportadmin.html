@@ -1,0 +1,191 @@
+<include file="Repast:header"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<body id="page_intelOrder" class="myOrderCon">
+<div style="float:none;width:100%;" class="headselect"> <a class="link_tel icon-phone">统计报表</a> </div>
+<div class="container" style="padding:0;"> <br/>
+  <header id="container">
+    <div>
+      <form class="form" method="post"   action=""  >
+        <table style="color:#000;">
+          <TR>
+            <th  style="width:20%">时间：</th>
+            <td><input type="input" class="px" id="statdate" value="<if condition="$statdate neq ''">
+              {pigcms:$statdate|date="Y-m-d  H:i:s",###}
+              </if>
+              " onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="statdate" />
+              到
+              <input type="input" class="px" id="enddate" value="<if condition="$enddate neq ''">
+              {pigcms:$enddate|date="Y-m-d  H:i:s",###}
+              </if>
+              " name="enddate"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  />
+              <input type="button" id='chaxun' value="查询">
+              <input type="button" id='benyue' value="本月">
+              <input type="hidden" id='yue'name='yue' value="{pigcms:$month}">
+              <input type="hidden" id='day'name='day' value="{pigcms:$day}"></td>
+          </TR>
+           <tr>
+          <th >日期：</th>
+          <td ><select onChange="dourl1(this.value)" class="month">
+          <option  value="0" >选择月</option>
+<option  value="1" <if condition="$month eq '1'"> selected</if> >1月</option>      
+<option value="2" <if condition="$month eq '2'"> selected</if>>2月</option>
+<option value="3" <if condition="$month eq '3'"> selected</if>>3月</option>
+<option value="4" <if condition="$month eq '4'"> selected</if>>4月</option>
+<option value="5" <if condition="$month eq '5'"> selected</if>>5月</option>
+<option value="6" <if condition="$month eq '6'"> selected</if>>6月</option>
+<option value="7" <if condition="$month eq '7'"> selected</if>>7月</option>
+<option value="8" <if condition="$month eq '8'"> selected</if>>8月</option>
+<option value="9" <if condition="$month eq '9'"> selected</if>>9月</option>
+<option value="10" <if condition="$month eq '10'"> selected</if>>10月</option>
+<option value="11" <if condition="$month eq '11'"> selected</if>>11月</option>
+<option value="12" <if condition="$month eq '12'"> selected</if>>12月</option>
+</select>
+<select onChange="dourl2(this.value)" class="day">
+<option  value="0" >选择日</option> 
+<option  value="1" <if condition="$day eq '1'"> selected</if> >1日</option>      
+<option value="2" <if condition="$day eq '2'"> selected</if>>2日</option>
+<option value="3" <if condition="$day eq '3'"> selected</if>>3日</option>
+<option value="4" <if condition="$day eq '4'"> selected</if>>4日</option>
+<option value="5" <if condition="$day eq '5'"> selected</if>>5日</option>
+<option value="6" <if condition="$day eq '6'"> selected</if>>6日</option>
+<option value="7" <if condition="$day eq '7'"> selected</if>>7日</option>
+<option value="8" <if condition="$day eq '8'"> selected</if>>8日</option>
+<option value="9" <if condition="$day eq '9'"> selected</if>>9日</option>
+<option value="10" <if condition="$day eq '10'"> selected</if>>10日</option>
+<option value="11" <if condition="$day eq '11'"> selected</if>>11日</option>
+<option value="12" <if condition="$day eq '12'"> selected</if>>12日</option>
+<option value="13" <if condition="$day eq '13'"> selected</if>>13日</option>
+<option value="14" <if condition="$day eq '14'"> selected</if>>14日</option>
+<option value="15" <if condition="$day eq '15'"> selected</if>>15日</option>
+<option value="16" <if condition="$day eq '16'"> selected</if>>16日</option>
+<option value="17" <if condition="$day eq '17'"> selected</if>>17日</option>
+<option value="18" <if condition="$day eq '18'"> selected</if>>18日</option>
+<option value="19" <if condition="$day eq '19'"> selected</if>>19日</option>
+<option value="20" <if condition="$day eq '20'"> selected</if>>20日</option>
+<option value="21" <if condition="$day eq '21'"> selected</if>>21日</option>
+<option value="22" <if condition="$day eq '22'"> selected</if>>22日</option>
+<option value="23" <if condition="$day eq '23'"> selected</if>>23日</option>
+<option value="24" <if condition="$day eq '24'"> selected</if>>24日</option>
+<option value="25" <if condition="$day eq '25'"> selected</if>>25日</option>
+<option value="26" <if condition="$day eq '26'"> selected</if>>26日</option>
+<option value="27" <if condition="$day eq '27'"> selected</if>>27日</option>
+<option value="28" <if condition="$day eq '28'"> selected</if>>28日</option>
+<option value="29" <if condition="$day eq '29'"> selected</if>>29日</option>
+<option value="30" <if condition="$day eq '30'"> selected</if>>30日</option>
+<option value="31" <if condition="$day eq '31'"> selected</if>>31日</option>
+</select></td>
+        </tr>
+        </table>
+      </form>
+    </div>
+    <table style="color:#000;" class="imagetable">
+      <thead>
+        <tr>
+          <th style="width:60%">项目</th>
+          <th style="width:15%">金额</th>
+          <th style="width:25%">数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <volist name="orderList" id="order">
+          <volist name="order['dishes']" id="row">
+          <if condition="$row.summoney gt '0'">
+            <tr>
+              <td>{pigcms:$row.itemname}</td>
+              <td>{pigcms:$row.numi}次</td>
+              <td>￥{pigcms:$row.summoney}元</td>
+            </tr>
+            </if>
+          </volist>
+        </volist>
+        <if condition="$pcrecord gt '0'">
+        <tr>
+          <td>管理员充值</td>
+          <td>{pigcms:$pcrecordcount}次</td>
+          <td>￥{pigcms:$pcrecord}元</td>
+        </tr>
+        </if>
+        <if condition="$wxrecord gt '0'">
+        <tr>
+          <td>微信充值</td>
+          <td>{pigcms:$wxrecordcount}次</td>
+          <td>￥{pigcms:$wxrecord}元</td>
+        </tr>
+        </if>
+      </tbody>
+    </table>
+  </header>
+  <div class="pages" style="text-align:right; height:30px; line-height:30px; margin-right:10px;margin-bottom:20px;"></div>
+</div>
+<style>
+table.imagetable {  
+    font-family: verdana,arial,sans-serif;  
+    font-size:11px;  
+    color:#333333;  
+    border-width: 1px;  
+    border-color: #999999;  
+    border-collapse: collapse;  
+}  
+table.imagetable th {  
+    background:#b5cfd2 url('{pigcms::RES}/images/cell-blue.jpg');  
+    border-width: 1px;  
+    padding: 8px;  
+    border-style: solid;  
+    border-color: #999999;  
+}  
+table.imagetable td {  
+    background:#dcddc0 url('{pigcms::RES}/images/cell-grey.jpg');  
+    border-width: 1px;  
+    padding: 8px;  
+    border-style: solid;  
+    border-color: #999999;  
+}  
+#footer_menu {position: fixed;}
+.list_order li>label:after{right: 5px;}
+</style>
+<if condition="$isadmin.level gt 0"> <include file="Repast:footeradmin"/>
+  <else/>
+  <include file="Repast:footer"/> </if>
+<script>
+$(function() {	
+    var min_height = $(document).height() - 80;
+    $("#container").css({"min-height":min_height});
+	 $("#benyue").click(function(){
+		$("#yue").val(13);
+		$("#day").val(0);
+		$(".form").submit();
+	});
+	 $("#chaxun").click(function(){
+		$("#yue").val(0);
+		$("#day").val(0);
+		$(".form").submit();
+	});
+});
+
+function orderList(obj) {
+	location.href = "{pigcms::U('Repast/myOrder', array('token'=>$token, 'wecha_id'=>$wecha_id, 'cid'=>$cid))}&status=" + $(obj).val();
+}
+function dourl1(m){
+$("#yue").val(m);
+$(".form").submit();
+}
+function dourl2(m){
+$("#day").val(m);
+$(".form").submit();
+}
+</script>
+</body>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Repast",
+            "moduleID":"0",
+            "imgUrl": "", 
+            "timeLineLink": "{pigcms::C('site_url') .  U('Repast/myOrder',array('token' => $_GET['token']))}",
+            "sendFriendLink": "{pigcms::C('site_url') .  U('Repast/myOrder',array('token' => $_GET['token']))}",
+            "weiboLink": "{pigcms::C('site_url') .  U('Repast/myOrder',array('token' => $_GET['token']))}",
+            "tTitle": "{pigcms:$metaTitle}",
+            "tContent": "{pigcms:$metaTitle}"
+        };
+</script>
+{pigcms:$shareScript}
+</html>

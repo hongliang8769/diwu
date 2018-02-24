@@ -1,0 +1,81 @@
+<include file="Public:head"/>  
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="{pigcms::RES}/js/cart/jscolor.js" type="text/javascript"></script>
+<script>
+function drop_confirm(msg, url){
+    if(confirm(msg)){
+        window.location = url;
+    }
+} 	
+   </script>
+<div class="content">
+<div class="cLineB">
+<h4 class="left">套餐管理</h4>
+<div class="searchbar right">
+</div>
+<div class="clr"></div>
+</div>
+<div class="cLine"><TABLE  border="0" cellSpacing="0" cellPadding="0" width="100%">
+<TR>
+<TD><a href="{pigcms::U('Repast/taorecordedit',array('token'=>$this->token,'wecha_id'=>$mywecha_id))}" title='新增套餐' class='btnGrayS vm bigbtn'><img class="vm" src="./tpl/User/default/common/images/product/add.png">添加套餐</a></TD>
+<TD>
+<form method="post"  action="" id="info" >
+	关键字：
+	<input type="text" class="px" name="search" value="{pigcms:$search}" style="height:25px; width:200px;" placeholder="请输入关键字">
+	<input type="submit" class="btnGrayS" value="搜索">
+</form>
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post"  action="" id="info" >
+</TD>
+</TR>
+</TABLE>
+<TABLE class="ListProduct" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<THEAD>
+<tr>
+<th width="120">姓名</th>
+<th width="120">套餐名称</th>
+<th width="120">内容</th>
+<th width="50">购买时间</th>
+<th width="80">操作</th>
+</tr>
+</THEAD>
+<TBODY>
+<TR></TR>
+<volist  name="list" id="item" empty="暂时没有数据！">
+<TR>
+<TD>{pigcms:$item.truename}</TD>
+<TD>{pigcms:$item.name}</TD>
+<TD>
+<volist name="item['info']" id="row"> 
+    <if condition="$row.name neq '' ">
+    <p>{pigcms:$row.name}&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:red;">{pigcms:$row.num}次</font></p>
+    </if>
+ </volist>
+</TD>
+
+<TD>{pigcms:$item.add_time|date='Y-m-d H:i:s',###}</TD>
+<TD><a href="{pigcms::U('Repast/taorecordedit',array('token'=>$this->token,'wecha_id'=>$item['wecha_id'],'id'=>$item['id']))}"><strong>编辑</strong></a><br>
+<a href="javascript:drop_confirm('您确定要删除吗?\\n\\n此操作将删除套餐记录','/index.php?g=User&m=Repast&a=taorecorddel&token={pigcms:$Think.get.token}&id={pigcms:$item.id}&wecha_id={pigcms:$item.wecha_id}');"><strong>删除</strong></a>
+</TD>
+</TR>
+</volist>
+</TBODY>
+</TABLE>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{pigcms:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>  
+        <div class="clr"></div>
+		<include file="Public:footer"/>
+      </div>
+    </div>
+  </div> 

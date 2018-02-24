@@ -1,0 +1,117 @@
+<if condition="$ischild neq 1">
+<include file="Public:head" />
+<else />
+<include file="Repast:head" />
+</if>
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script>
+function chg_catid(catid) {
+	document.getElementById('cid').value = catid;
+}
+</script>
+<div class="content"> 
+	<div class="cLineB"> 
+		<h4>套餐设置</h4> 
+		<a href="{pigcms::U('Repast/dishpak',array('token' => $token,'cid'=>$cid))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+	</div> 
+	<!--tab start-->
+<div class="tab">
+<ul>
+<if condition="$ischild neq 1"> <li class="tabli" id="tab0"><a href="{pigcms::U('Repast/company_index', array('token' => $token,'cid' => $cid))}">店面管理</a></li></if>
+<li class="tabli" id="tab2"><a href="{pigcms::U('Repast/sort', array('token' => $token,'cid' => $cid))}">分类管理</a></li>
+<li class="tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">预约管理</a></li>
+<li class="current tabli" id="tab4"><a href="{pigcms::U('Repast/dishpak', array('token' => $token,'cid' => $cid))}">套餐管理</a></li>
+<li class="tabli" id="tab5"><a href="{pigcms::U('Repast/orders', array('token' => $token,'cid' => $cid))}">订单管理</a></li>
+<li class="tabli" id="tab6"><a href="{pigcms::U('Repast/payrecord', array('token' => $token,'cid' => $cid))}">交易记录</a></li>
+<li class="tabli" id="tab6"><a href="{pigcms::U('Repast/taorecord', array('token' => $token,'cid' => $cid))}">套餐记录</a></li>
+</ul>
+</div>
+<!--tab end-->
+<form method="post" action="" id="formID">
+<input type="hidden" name="id" value="{pigcms:$tableData.id}" />
+<input type="hidden" name="cid" id="cid" value="{pigcms:$cid}" />
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody>
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td>
+        <input type="text" name="name" id="name" value="{pigcms:$tableData.name}" class="px" style="width:400px;" />
+        </td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>套餐设置：</th> 
+        <td>
+        <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="50%"> 
+        <thead  class="field">
+				<tr>
+                    <th>项目名称</th>
+                    <th>数量</th>
+				</tr>
+		</thead>
+      <tbody> 
+      <volist name="tableData['info']" id="row"> 
+	  <tr> 
+       <td>  <select name="dishid[{pigcms:$i}]" style="width:200px; height:26px" onchange="chg_catid(this.value)" >
+       <option value="" style="padding:5px 0 5px 5px">--------请选择--------</option>
+         <volist name="dishList" id="t" key="k">
+        <option  value="{pigcms:$t.id}" <if condition="$row['dishid'] eq $t['id']">selected</if>>{pigcms:$t.name}</option>
+        </volist>
+        </select> </td>  
+        <td>
+          <input type="text" name="num[{pigcms:$i}]" id="num[{pigcms:$i}]" value="{pigcms:$row['num']}"  class="px" style="width:40px;" />
+        </td>
+       </tr> 
+       </volist>
+      </tbody> 
+     </table>
+       
+        </td> 
+       </tr>
+       
+        <tr> 
+        <th><span class="red">*</span>价格：</th> 
+        <td>
+        <input type="text" name="lprice" id="lprice" value="{pigcms:$tableData['lprice']}" class="px" style="width:100px;" />&nbsp;元
+        </td> 
+       </tr>
+      
+   <tr> 
+        <th>是否推荐：</th> 
+        <td>
+        <input type="checkbox" name="ishot" id="ishot" value="1" <if condition="$tableData['ishot'] eq 1">checked</if> />
+        </td> 
+       </tr>
+    
+       <tr> 
+        <th>是否上架：</th> 
+        <td>
+        <input type="checkbox" name="isopen" id="isopen" value="1" <if condition="$tableData['isopen'] eq 1">checked</if> />
+        </td> 
+       </tr>
+       <tr> 
+        <th>展示图片：</th>
+        <td><input type="text" name="image" value="{pigcms:$tableData.image}" class="px" id="pic" style="width:400px;" />  <script src="/tpl/static/upyun.js"></script><a href="###" onclick="upyunPicUpload('pic',700,700,'{pigcms:$token}')" class="a_upload">上传</a> <a href="###" onclick="viewImg('pic')">预览</a></td> 
+       </tr>
+       <tr> 
+        <th>描述：</th> 
+        <td><textarea name="des" class="px" style="width:400px;height:80px;">{pigcms:$tableData.des}</textarea></td> 
+       </tr>
+       <tr> 
+        <th>排序：</th> 
+        <td><input type="text" id="sort" name="sort" value="{pigcms:$tableData.sort}" class="px" style="width:50px;" />  数字越小排在越前（大于等于0的整数）</td> 
+       </tr>
+       <tr>
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="submit" class="btnGreen" id="save">保存</button> &nbsp; <a href="{pigcms::U('Repast/dishpak',array('token' => $token, 'cid' => $cid))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+</form>
+</div> 
+
+<include file="Public:footer" />

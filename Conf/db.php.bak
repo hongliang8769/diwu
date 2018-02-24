@@ -1,0 +1,12 @@
+<?php
+return array (
+  'DB_TYPE' => 'mysql',
+  'DB_HOST' => 'localhost',
+  'DB_PORT' => '3306',
+  'DB_NAME' => 'weixin18',
+  'DB_USER' => 'root',
+  'DB_PWD' => 'b70d4e3008',
+  'DB_PREFIX' => 'tp_',
+  'agent_version' => 1,
+);
+?>

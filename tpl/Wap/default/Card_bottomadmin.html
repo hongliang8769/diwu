@@ -1,0 +1,40 @@
+<style>
+
+.footermenu a:visited p ,.footermenu a p{
+     color: #fff; 
+    font-weight:normal; 
+}
+.footermenu a.active p{
+    color: #2489ce;
+    font-weight: 700; 
+}
+</style>
+<div style="height:40px;"></div>
+<div class="footermenu">
+    <ul>
+    <li>
+        <a rel="external" <php>if(ACTION_NAME=='cardadmin'||MODULE_NAME=='Userinfo'){</php>class="active"<php>}</php> href="/index.php?g=Wap&m=Card&a=cardadmin&token={pigcms:$_GET['token']}&cardid={pigcms:$_GET['cardid']|intval}&wecha_id={pigcms:$_GET['wecha_id']}">
+            <img src="{pigcms::RES}/card/images/my.png">
+            <p class="fontcolor">会员管理</p>
+            </a>
+        </li>
+    <li>
+            <a rel="external" <php>if(ACTION_NAME=='myOrderadmin'){</php>class="active"<php>}</php> href="/index.php?g=Wap&m=Repast&a=myOrderadmin&token={pigcms:$_GET['token']}&cardid={pigcms:$_GET['cardid']|intval}&wecha_id={pigcms:$_GET['wecha_id']}">
+            <img src="{pigcms::RES}/card/images/home.png">
+            <p class="fontcolor">预约管理</p>
+            </a>
+        </li>
+        <li>
+            <a rel="external" <php>if(ACTION_NAME=='payRecordadmin'){</php>class="active"<php>}</php> href="/index.php?g=Wap&m=Card&a=payRecordadmin&token={pigcms:$token}&wecha_id={pigcms:$_GET['wecha_id']}">
+            <img src="{pigcms::RES}/card/images/detaila.png">
+            <p class="fontcolor">收银管理</p>
+            </a>
+        </li>
+        <li>
+            <a  rel="external" <php>if(ACTION_NAME=='myreportadmin'){</php>class="active"<php>}</php> href="/index.php?g=Wap&m=Repast&a=myreportadmin&token={pigcms:$token}&wecha_id={pigcms:$_GET['wecha_id']}">
+            <img src="{pigcms::RES}/card/images/c.png">
+            <p class="fontcolor">报表</p>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,128 @@
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+<div class="content">
+<style>
+.userinfoArea th {width:80px;}
+</style>
+<div class="cLineB">
+  <h4>会员编辑 </h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+      
+    <div class="msgWrap bgfc" style="margin-top:10px;">
+	  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	
+      <input  type="hidden" name="uid" id="uid"value="{pigcms:$info.id}"> 
+      <input  type="hidden" name="itemid"id="itemid" value="{pigcms:$cardInfo.id}"> 
+      <input  type="hidden" name="cid" id="cid"value="{pigcms:$carinfo.id}"> 
+		<table class="userinfoArea" style=" margin-left:60px;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+            	<tr>
+					<th width="80">类型：</th>
+					<td><select name="cardid" id="cardid">
+		<option value="">非会员</option>
+		<volist name="cards" id="cards">
+			<option value="{pigcms:$cards.id}" <if condition="$cards.id eq $cardid">selected</if>>{pigcms:$cards.cardname}</option>
+		</volist>
+	</select></td>
+				</tr>
+                <tr>
+					<th width="80">卡号：</th>
+					<td><input  type="text" class="px" name="number"  id="number"   readonly value="{pigcms:$cardInfo.number}"></td>
+				</tr>
+				<tr>
+					<th width="80">姓名：</th>
+					<td><input name="truename" 
+onblur="check1(this,'请输入您的真实姓名')"  type="text" class="px" id="truename"  value="{pigcms:$info.truename}" placeholder="请输入您的真实姓名"  /></td>
+				</tr>
+				<tr>
+					<th width="80">性别：</th>
+					<td> <input type="radio" name="sex" value="1"  <if condition="$info.sex eq 1">checked</if> />               
+              <label for="sex">男 &nbsp; &nbsp;</label>
+              <input type="radio" name="sex" value="2" <if condition="$info.sex eq 2">checked</if> />
+              <label for="sex">女</label></td>
+				</tr>
+                <tr>
+					<th width="80">积分：</th>
+					<td><input name="total_score" 
+ type="text" class="px" id="total_score" value="{pigcms:$info.total_score}" placeholder="请输入积分" /></td>
+				</tr>
+                <tr>
+					<th width="80">余额：</th>
+					<td><input name="balance" 
+ type="text" class="px" id="balance" value="{pigcms:$info.balance}" placeholder="请输入余额" readonly />&nbsp;&nbsp;要给用户充值，请到会员管理中操作。</td>
+				</tr>
+				<tr>
+					<th width="80">小区：</th>
+					<td><input name="address" 
+ type="text" class="px" id="address" value="{pigcms:$info.address}"style="width:460px;" placeholder="请输入您的小区" /></td>
+				</tr>
+				<tr>
+					<th width="80">备注：</th>
+					<td><input name="beizhu" style="width:460px;"  type="text" class="px" id="beizhu" value="{pigcms:$info.beizhu}" placeholder="请输入备注" /></td>
+				</tr>
+				<tr>
+					<th>车牌：</th>
+					<td><select  name="shortname" id="shortname" style="border:1px solid #979797; height:30px; width:60px;font-size:16px; line-height:22px; color:#979797;"  >
+                        <option value="湘"  selected="selected" <if condition="$carinfo['shortname'] eq '湘'">selected</if>>湘</option>
+                        <option value="京" <if condition="$carinfo['shortname'] eq '京'">selected</if>>京</option>
+                        <option value="津" <if condition="$carinfo['shortname'] eq '津'">selected</if>>津</option>
+                        <option value="冀" <if condition="$carinfo['shortname'] eq '冀'">selected</if>>冀</option>
+                        <option value="晋"<if condition="$carinfo['shortname'] eq '晋'">selected</if>>晋</option>
+                        <option value="蒙"<if condition="$carinfo['shortname'] eq '蒙'">selected</if>>蒙</option>
+                        <option value="辽"<if condition="$carinfo['shortname'] eq '辽'">selected</if>>辽</option>
+                        <option value="吉"<if condition="$carinfo['shortname'] eq '吉'">selected</if>>吉</option>
+                        <option value="黑"<if condition="$carinfo['shortname'] eq '黑'">selected</if>>黑</option>
+                        <option value="沪"<if condition="$carinfo['shortname'] eq '沪'">selected</if>>沪</option>
+                        <option value="苏"<if condition="$carinfo['shortname'] eq '苏'">selected</if>>苏</option>
+                        <option value="浙"<if condition="$carinfo['shortname'] eq '浙'">selected</if>>浙</option>
+                        <option value="皖"<if condition="$carinfo['shortname'] eq '皖'">selected</if>>皖</option>
+                        <option value="闽"<if condition="$carinfo['shortname'] eq '闽'">selected</if>>闽</option>
+                        <option value="赣"<if condition="$carinfo['shortname'] eq '赣'">selected</if>>赣</option>
+                        <option value="鲁"<if condition="$carinfo['shortname'] eq '鲁'">selected</if>>鲁</option>
+                        <option value="豫"<if condition="$carinfo['shortname'] eq '豫'">selected</if>>豫</option>
+                        <option value="鄂"<if condition="$carinfo['shortname'] eq '鄂'">selected</if>>鄂</option>
+                        <option value="粤"<if condition="$carinfo['shortname'] eq '粤'">selected</if>>粤</option>
+                        <option value="桂"<if condition="$carinfo['shortname'] eq '桂'">selected</if>>桂</option>
+                        <option value="琼"<if condition="$carinfo['shortname'] eq '琼'">selected</if>>琼</option>
+                        <option value="渝"<if condition="$carinfo['shortname'] eq '渝'">selected</if>>渝</option>
+                        <option value="川"<if condition="$carinfo['shortname'] eq '川'">selected</if>>川</option>
+                        <option value="贵"<if condition="$carinfo['shortname'] eq '贵'">selected</if>>贵</option>
+                        <option value="云"<if condition="$carinfo['shortname'] eq '云'">selected</if>>云</option>
+                        <option value="藏"<if condition="$carinfo['shortname'] eq '藏'">selected</if>>藏</option>
+                        <option value="陕"<if condition="$carinfo['shortname'] eq '陕'">selected</if>>陕</option>
+                        <option value="甘"<if condition="$carinfo['shortname'] eq '甘'">selected</if>>甘</option>
+                        <option value="青"<if condition="$carinfo['shortname'] eq '青'">selected</if>>青</option>
+                        <option value="宁"<if condition="$carinfo['shortname'] eq '宁'">selected</if>>宁</option>
+                        <option value="新"<if condition="$carinfo['shortname'] eq '新'">selected</if>>新</option>
+                        <option value="台"<if condition="$carinfo['shortname'] eq '台'">selected</if>>台</option>
+                      </select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="carnumber" 
+onblur="check1(this,'请输入您的车牌号！')"  type="text" class="px" id="carnumber" value="{pigcms:$carinfo.carnumber}" placeholder="请输入您的车牌" /></td>
+				</tr>
+				<tr>
+					<th>车型：</th>
+					<td><input name="cartype" 
+onblur="check1(this,'请输入您的车型！')"  type="text" class="px" id="cartype" value="{pigcms:$carinfo.cartype}" placeholder="请输入您的车型"  /></td>
+				</tr>
+                <tr>
+					<th>手机：</th>
+					<td><input  name="tel"  class="px" id="tel" value="{pigcms:$info.tel}"  type="text" placeholder="手机号码"  /></td>
+				</tr>
+				
+				<th>&nbsp;</th>
+					<td>
+					<input type="hidden" name="keyword" value="{Pigcms:$infoType.keyword}" />
+					<input type="hidden" name="infotype" value="{Pigcms:$infoType.type}" />
+					<input type="hidden" name="token" value="{Pigcms:$token}" />
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public:footer"/>

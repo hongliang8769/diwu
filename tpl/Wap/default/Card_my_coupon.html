@@ -1,0 +1,181 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{pigcms:$thisCard.cardname}优惠券</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::RES}/card/style/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/tpl/static/repast/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../tpl/static/repast/css/wei_dialog.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../tpl/static/repast/css/wei_canyin.css" media="all" />
+<script src="{pigcms::RES}/card/js/accordian.pack.js" type="text/javascript"></script>
+<script type="text/javascript" src="/tpl/static/repast/js/wei_webapp_v2_common.js"></script>
+</head>
+<body id="cardnews" onLoad="new Accordian(&#39;basic-accordian&#39;,5,&#39;header_highlight&#39;);" class="mode_webapp">
+<style>
+header {
+    margin: 0 10px;
+    position: relative;
+    z-index: 4;
+}
+header ul {
+	margin:0 -1px;
+	border: 1px solid #179f00;
+	border-radius: 3px;
+	width: 100%;
+	overflow: hidden;
+}
+header ul li a.bl {
+    border-left: 1px solid #0b8e00;
+}
+header ul li a.on {
+    background-color:#179f00;
+    color: #ffffff;
+    background-image: -moz-linear-gradient(center bottom , #179f00 0%, #5dd300 100%);
+}
+header ul li a {
+    color: #0b8e00;
+    display: block;
+    font-size: 15px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width:33%;
+    float:left;
+}
+.pic{width:100%;margin-bottom:10px;}
+.over{background:#aaa;border:1px solid #aaa;box-shadow: 0 1px 0 #cccccc inset, 0 1px 2px rgba(0, 0, 0, 0.5);}
+.window .title{background-image: linear-gradient(#179f00, #179f00);}
+table {
+    display: table;
+
+    border-spacing: 2px;
+    border-color: grey;
+}
+.link_tel {
+    display: block!important;
+    line-height: 40px!important;
+    background: #ea5946;
+    color: #fff!important;
+    text-align: center;
+    /* border-radius: 5px; */
+    word-spacing: nowrap;
+    overflow: hidden;
+    font-size: 18px;
+    position: relative;
+}
+</style>
+<div style="float:none;width:100%;" class="headselect">
+	<a class="link_tel icon-phone">优惠券</a>
+</div>
+<div id="basic-accordian">
+<volist name="list" id="item" empty="暂时没有数据！">
+<div id="test{pigcms:$item.id}-header" class="accordion_headings  <?php if ($item['id']==$firstItemID){?>header_highlight<?php } ?>">
+<div class="tab  <if condition="$type eq 3">gift<else/>coupon</if>" style='background:none;'>
+<span class="title">
+{pigcms:$item.name}&nbsp;&nbsp;&nbsp;<font style="color:red;">{pigcms:$item.lprice}元</font>
+</span>
+</div>
+<div id="test{pigcms:$item.id}-content">
+<div class="accordion_child">
+
+
+<p style="font-size:18px; height:30px; ">套餐详情:</p>
+<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+        <thead  class="field">
+				<tr>
+                    <th style="text-align:left;">项目名称</th>
+                    <th style="text-align:left; width:35px;">数量</th>
+				</tr>
+		</thead>
+      <tbody> 
+<volist name="item['info']" id="row"> 
+    <tr> 
+     <td style="font-size:14px;">{pigcms:$row.name}</td>
+     <td style="font-size:14px;">{pigcms:$row.num}</td>
+   </tr> 
+ </volist>
+ <tr> 
+     <td></td>
+     <td></td>
+   </tr>
+ <tr> 
+   <td colspan="2" style="height:20px;">&nbsp;</td>
+   </tr>
+ </tbody> 
+     </table>
+<div id="queren{pigcms:$item.id}">
+	
+	<span  style=' cursor:pointer;' class="submit" ><if condition="$item.get_count gt 0">再次购买<else/>立即购买</if></span>	
+    <input type="hidden" name="orderid" value="{pigcms:$item.orderid}" /><input type="hidden" name="price" value="{pigcms:$item.lprice}" /><input type="hidden" name="itemname" value="{pigcms:$item.name}" />
+    <input type="hidden" name="itemid" value="{pigcms:$item.id}" />
+</div>
+<div style="clear:both;height:20px;"></div>
+</div> 
+<div style="clear:both;height:20px;"></div>
+</div>
+</div>
+
+</volist>
+</div>
+<script>
+var jQ = jQuery.noConflict();
+jQ(function() {	
+    var min_height = jQ(document).height() - 80;
+    jQ("#container").css({"min-height":min_height});
+	jQ(".submit").click(function() {	
+		var orderid=jQ(this).next("input[name='orderid']").val();
+		var price=jQ(this).nextAll("input[name='price']").val();
+		var itemname=jQ(this).nextAll("input[name='itemname']").val();
+		var itemid=jQ(this).nextAll("input[name='itemid']").val();
+		MDialog.confirm('', '请选择支付方式？', null, '微信支付', function() {
+				location.href = "{pigcms::U('Repast/weixinpay',array('token'=>$token,'wecha_id'=>$wecha_id,'success'=>1,'from'=> 'Card','type'=>4))}" + '&orderName=' + itemname + '&single_orderid=&price=' + price+'&redirect=Card/payCouponReturn|itemid:'+itemid+',type:4';
+			}, null,'现金支付', function() {
+				MDialog.notice("现金支付请到柜台找服务人员！");
+				//location.href = "{pigcms::U('CardPay/pay',array('token'=>$token,'wecha_id'=>$wecha_id,'success'=>1,'from'=> 'Card','type'=> 4))}"+'&orderName=' + itemname + '&single_orderid=' + orderid + '&price=' + price+'&redirect=Card/payCouponReturn|itemid:'+itemid+',type:4';
+			}, null, null, true, true);
+    });
+});
+function orderList(obj) {
+	location.href = "{pigcms::U('Repast/myOrder', array('token'=>$token, 'wecha_id'=>$wecha_id, 'cid'=>$cid))}&status=" + jQ(obj).val();
+}
+</script>
+<script>
+
+
+function payformsubmit(itemid){
+	var submitData = {
+		coupon_id:itemid,
+		cardid: {pigcms:$cardid},
+		type: {pigcms:$type},
+		cat:3,
+	};
+
+	jQ.post('/index.php?g=Wap&m=Card&a=action_myCoupon&wecha_id={pigcms:$wecha_id}&token={pigcms:$token}', submitData,function(data) {
+		if(data.err == 0){
+			jQ('.count').html(jQ('.count').html()-1);
+		}
+		art.dialog({   
+			content: data.info,  
+			time:3, 
+			title:'消息提醒,3秒后关闭',
+			ok: function(){
+				window.location.reload();
+				}   
+		});
+		//alert(data.info);
+	}, "json");
+
+
+}
+
+
+
+
+</script>
+<include file="Card:bottom"/>
+<include file="Card:share"/>
+</body>
+</html>

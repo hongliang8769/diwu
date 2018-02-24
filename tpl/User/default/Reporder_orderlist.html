@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> 纽曼微信公众服务平台 微信平台</title>
+<meta name="keywords" content="纽曼导航-国内优秀的微信公众智能服务平台，八大微体系：微菜单、微官网、微会员、微活动、微商城、微推送、微服务、微统计，企业微营销必备。">
+<meta name="description" content="纽曼导航-国内优秀的微信公众智能服务平台，八大微体系：微菜单、微官网、微会员、微活动、微商城、微推送、微服务、微统计，企业微营销必备。">
+<meta http-equiv="MSThemeCompatible" content="Yes">
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" />
+</head>
+<body id="nv_member" class="pg_CURMODULE">
+<script type="text/javascript" src="../tpl/static/repast/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../tpl/static/repast/js/wei_webapp_v2_common.js"></script>
+<if condition="$usertplid eq 0">
+		<link href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/style.css?id=103" rel="stylesheet" type="text/css" />
+	<else />
+		<link href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/style-{pigcms:$usertplid}.css?id=103" rel="stylesheet" type="text/css" />
+	</if>
+<link rel="stylesheet" type="text/css" href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/style_2_common.css?BPm" />
+<div class="content">
+<style>
+TABLE.ListProduct THEAD TH{ font-size:22px; font-weight:bolder; }
+TABLE.ListProduct TBODY TD{ font-size:20px; font-weight:bolder; text-align:center;}
+</style>
+<!--tab start-->
+
+<!--tab end-->
+<div class="msgWrap">
+<input type="hidden" name="tpage" id="tpage" value="{pigcms:$tpage}" />
+<input type="hidden" name="ttime" id="ttime" value="{pigcms:$ttime}" />
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<th width="43%" style="text-align:center;">预约信息</th>
+<th colspan="2" style="text-align:center;">星沙靓车会</th>
+<th width="43%" style="text-align:center;">付款信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2" style=" padding-top:0; vertical-align:top;">
+<table class="ListProduct" id='yinfo' border="0" cellspacing="0" cellpadding="0" width="100%" >
+<tbody></tbody>
+</table>
+</td>
+<td colspan="2" style=" padding-top:0; vertical-align:top;">
+<table class="ListProduct" id='finfo' border="0" cellspacing="0" cellpadding="0" width="100%" >
+<tbody></tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+
+<script>
+$(function(){
+	var tpage=$("input[name='tpage']").val();
+	var ttime=$("input[name='ttime']").val();
+	var num =2;
+	getAllList(1);
+   setInterval(function() {
+            getAllList(num);
+            if (num >= parseInt("{pigcms:$tpage}")){num=0;}
+			num++;
+                
+        }, parseInt("{pigcms:$ttime}"));
+});
+/*window.addEventListener("DOMContentLoaded", function(){
+	
+    setHeight();
+}, false);*/
+
+function getAllList(p){
+    var params = {
+    }
+   // MLoading.show('加载中...');
+     _doAjax("{pigcms::U('Reporder/getorderlist', array('token'=>$token, 'wecha_id' => $wecha_id, 'cid' => $cid))}&p="+p, 'GET', params, function(res) {
+       // MLoading.hide();
+        window.res = res;
+        if(res ){
+            
+            (function(){
+				var TPL = '<tr><td width="110">{reservetime}</td>';
+				TPL += '<td width="100">{carnumber}</td>';
+				TPL += '<td width="60">{truename}</td>'; 
+				TPL += '<td width="50" style="color:{color}">{cardname}</td></tr>'; 
+				var TPL2 = '<tr><td width="100">{carnumber}</td>';
+				TPL2 += '<td width="60">{truename}</td>'; 
+				TPL2 += '<td width="50" style="color:{color}">{cardname}</td>'; 
+				TPL2 += '<td width="180">{paytime}&nbsp;&nbsp;&nbsp;<span style="color:#009933;">付款成功</span></td></tr>';
+               var dds_HTML = iTemplate.makeList(TPL, res.yinfolist, function(k,v){
+				   var color='blue';
+				   if(v.cardname=='金卡')
+				   {
+					   color='#FC0';
+				   }else if(v.cardname=='钻卡'){
+					   color='#C30';
+					}
+				   return{
+					   color:color
+					}
+               });
+			   $('#yinfo').find('tbody').html(dds_HTML);
+			   var dds_HTML2 = iTemplate.makeList(TPL2, res.finfolist, function(k,v){
+				   var color='blue';
+				   if(v.cardname=='金卡')
+				   {
+					   color='#FC0';
+				   }else if(v.cardname=='钻卡'){
+					   color='#C30';
+					}
+				   return{
+					   color:color
+					}
+               });
+			   $('#finfo').find('tbody').html(dds_HTML2);
+            })();
+        }
+    });
+}
+</script>
+</div>
+
+<div class="clr"></div>
+
+
+<div style="display:none"></div>
+</div></body></html>
