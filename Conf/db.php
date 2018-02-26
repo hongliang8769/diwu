@@ -5,7 +5,7 @@ return array (
   'DB_PORT' => '3306',
   'DB_NAME' => 'wxdiwu',
   'DB_USER' => 'root',
-  'DB_PWD' => 'root',
+  'DB_PWD' => 'b70d4e3008',
   'DB_PREFIX' => 'tp_',
   'agent_version' => 1,
 );
