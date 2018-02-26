@@ -67,97 +67,6 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover { background: url
      
   </ul>
  </if>
-  <if condition="$allcar eq false or $allcar eq ''">
-      <else />
-      <volist id="item" name="allcar">
- <ul class="round">
- <li><table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang"><tbody><tr><th style="width:35px;"></th><td style="height:40px;width:100px; line-height:30px;"><font>{pigcms:$item.shortname}{pigcms:$item.carnumber}</font></td><td><font>{pigcms:$item.cartype}</font></td><td style="width:60px;"><i class="icon18_common edit_gray">{pigcms:$item.id}</i>&nbsp;&nbsp;&nbsp;<i class="icon18_common del_gray">{pigcms:$item.id}</i></td></tr></tbody></table></li>
- </ul>
- </volist>
-  </if>
-  <ul class="round" id="addcarli" style="display:none;">
-   <li>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="width:35px;height:35px;line-height:40px;margin-top:5px;"></th>
-            <td><i class="icon20_common add_gray">增加一条</i>添加车辆</td> 
-          </tr>
-        </table>
-      </li>
-      </ul>
- <ul class="round" id="carfm" >
-    <if condition="$conf['carnumber'] eq 0">
-      <else />
-      <li>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="text-align:right;"><font color='red'>*</font>车牌:</th>
-            <td><table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-                <tbody>
-                  <tr>
-<th style=" width:60px;"><select  name="shortname" id="shortname" style="border:1px solid #979797; height:30px; width:60px; margin-left:10px; font-size:16px; line-height:22px; color:#979797;"  >
-                        <option value="湘"  selected="selected" <if condition="$carinfo['shortname'] eq '湘'">selected</if>>湘</option>
-                        <option value="京" <if condition="$carinfo['shortname'] eq '京'">selected</if>>京</option>
-                        <option value="津" <if condition="$carinfo['shortname'] eq '津'">selected</if>>津</option>
-                        <option value="冀" <if condition="$carinfo['shortname'] eq '冀'">selected</if>>冀</option>
-                        <option value="晋"<if condition="$carinfo['shortname'] eq '晋'">selected</if>>晋</option>
-                        <option value="蒙"<if condition="$carinfo['shortname'] eq '蒙'">selected</if>>蒙</option>
-                        <option value="辽"<if condition="$carinfo['shortname'] eq '辽'">selected</if>>辽</option>
-                        <option value="吉"<if condition="$carinfo['shortname'] eq '吉'">selected</if>>吉</option>
-                        <option value="黑"<if condition="$carinfo['shortname'] eq '黑'">selected</if>>黑</option>
-                        <option value="沪"<if condition="$carinfo['shortname'] eq '沪'">selected</if>>沪</option>
-                        <option value="苏"<if condition="$carinfo['shortname'] eq '苏'">selected</if>>苏</option>
-                        <option value="浙"<if condition="$carinfo['shortname'] eq '浙'">selected</if>>浙</option>
-                        <option value="皖"<if condition="$carinfo['shortname'] eq '皖'">selected</if>>皖</option>
-                        <option value="闽"<if condition="$carinfo['shortname'] eq '闽'">selected</if>>闽</option>
-                        <option value="赣"<if condition="$carinfo['shortname'] eq '赣'">selected</if>>赣</option>
-                        <option value="鲁"<if condition="$carinfo['shortname'] eq '鲁'">selected</if>>鲁</option>
-                        <option value="豫"<if condition="$carinfo['shortname'] eq '豫'">selected</if>>豫</option>
-                        <option value="鄂"<if condition="$carinfo['shortname'] eq '鄂'">selected</if>>鄂</option>
-                        <option value="粤"<if condition="$carinfo['shortname'] eq '粤'">selected</if>>粤</option>
-                        <option value="桂"<if condition="$carinfo['shortname'] eq '桂'">selected</if>>桂</option>
-                        <option value="琼"<if condition="$carinfo['shortname'] eq '琼'">selected</if>>琼</option>
-                        <option value="渝"<if condition="$carinfo['shortname'] eq '渝'">selected</if>>渝</option>
-                        <option value="川"<if condition="$carinfo['shortname'] eq '川'">selected</if>>川</option>
-                        <option value="贵"<if condition="$carinfo['shortname'] eq '贵'">selected</if>>贵</option>
-                        <option value="云"<if condition="$carinfo['shortname'] eq '云'">selected</if>>云</option>
-                        <option value="藏"<if condition="$carinfo['shortname'] eq '藏'">selected</if>>藏</option>
-                        <option value="陕"<if condition="$carinfo['shortname'] eq '陕'">selected</if>>陕</option>
-                        <option value="甘"<if condition="$carinfo['shortname'] eq '甘'">selected</if>>甘</option>
-                        <option value="青"<if condition="$carinfo['shortname'] eq '青'">selected</if>>青</option>
-                        <option value="宁"<if condition="$carinfo['shortname'] eq '宁'">selected</if>>宁</option>
-                        <option value="新"<if condition="$carinfo['shortname'] eq '新'">selected</if>>新</option>
-                        <option value="台"<if condition="$carinfo['shortname'] eq '台'">selected</if>>台</option>
-                      </select></th>
-                    <td><input name="carnumber"  type="text" class="px" id="carnumber" value="{pigcms:$carinfo.carnumber}" placeholder="请输入您的车牌"  /></td>
-                  </tr>
-                </tbody>
-              </table></td>
-          </tr>
-        </table>
-      </li>
-    </if>
-    <if condition="$conf['cartype'] eq 0">
-      <else />
-      <li>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="text-align:right;"><font color='red'>*</font>车型:</th>
-            <td><input name="cartype"   type="text" class="px" id="cartype" value="{pigcms:$carinfo.cartype}" placeholder="请输入您的车型及颜色"  /></td>
-          </tr>
-        </table>
-      </li>
-    <li>
-     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="width:35px;"></th>
-            <td><a style="margin-bottom: 15px;" id="addbtn" href="javascript:void(0);"><b>添加车辆</b></a><a class="displayno" style="margin-bottom: 15px;" id="repairbtn" href="javascript:void(0);"><b>修改车辆</b></a></td>
-            <td><a class="dropbtn" style="margin-bottom: 15px;margin-left:5px;" id="dropbtn" href="javascript:void(0);"><b>取消</b></a></td>
-          </tr>
- 	</table>
-     </li>
-     </if>
-  </ul>
 
   <ul class="round">
     <if condition="$cardInfo neq false">
@@ -209,39 +118,6 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover { background: url
         </table>
       </li>
     </if>
-    <if condition="$conf['bornyear'] eq 0">
-      <else />
-      <li>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="text-align:right;">出生年:</th>
-            <td><input name="bornyear"  type="text" class="px" id="bornyear" value="{pigcms:$info.bornyear}" placeholder="请输入出生年份" /></td>
-          </tr>
-        </table>
-      </li>
-    </if>
-    <if condition="$conf['bornmonth'] eq 0">
-      <else />
-      <li>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="text-align:right;">出生月:</th>
-            <td><input name="bornmonth"  type="text" class="px" id="bornmonth" value="{pigcms:$info.bornmonth}" placeholder="请输入出生月份" /></td>
-          </tr>
-        </table>
-      </li>
-    </if>
-    <if condition="$conf['bornday'] eq 0">
-      <else />
-      <li>
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-          <tr>
-            <th style="text-align:right;">出生日:</th>
-            <td><input name="bornday"  type="text" class="px" id="bornday" value="{pigcms:$fans.bornday}" placeholder="请输入出生日" /></td>
-          </tr>
-        </table>
-      </li>
-    </if>
     <if condition="$conf['qq'] eq 0">
       <else />
       <li>
@@ -258,25 +134,12 @@ a:hover .icon18_common.del_gray, .icon18_common.del_gray:hover { background: url
       <li>
         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
           <tr>
-            <th style="text-align:right;">小区:</th>
+            <th style="text-align:right;">地址:</th>
             <td><input name="address" 
- type="text" class="px" id="address" value="{pigcms:$fans.address}" placeholder="请输入您的小区" /></td>
+ type="text" class="px" id="address" value="{pigcms:$fans.address}" placeholder="请输入您的地址" /></td>
           </tr>
         </table>
       </li>
-    </if>
-    <if condition="$cardid neq ''">
-      <if condition="$conf['paypass'] eq 0">
-        <else />
-        <li>
-          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-            <tr>
-              <th style="text-align:right;">支付密码:</th>
-              <td><input name="paypass"  class="px" id="paypass" value=""  type="password" placeholder="请输入您的支付密码"  /></td>
-            </tr>
-          </table>
-        </li>
-      </if>
     </if>
   </ul>
   
@@ -331,288 +194,105 @@ function selectpor(el){
   <div style="height:60px;" id="msg">&nbsp;</div>
 <script type="text/javascript">
 jQuery(function($) {
-$("#carnumber").keypress(function(event) {
-		if ($(this).val().length < 7) {//限制输入字符串长度
-			  var key = event.which;//event.keyCode
-			  if (key >= 97 && key <= 122) {//找到输入是小写字母的ascII码的范围
-				  event.preventDefault();//取消事件的默认行为
-				  $(this).val($(this).val() + String.fromCharCode(key - 32));//转换
-			  }
-		} else {
-			 $(this).val($(this).val());        
-		}//控制长度
-});
-$("#carnumber").blur(function() {
-	$(this).val($(this).val().toUpperCase());
-});
-
-$('.is_check').click(function(){
-	if($('#num').html() != ''){
-		return false;
-	}
-	var phone 	= $('#tel').val();
-	reg=/^0{0,1}(13[0-9]|145|15[0-9]|16[0-9]|17[0-9]|18[0-9])[0-9]{8}$/i;
-	 if(!reg.test(phone)){   
-		alert("错误,请输入11位的手机号！");
-		$('#tel').css('background','red');
-		return;
-	 }else{
-		var num = $('#num').html();
-		if(num == ''){
-			$.post('index.php?g=Wap&m=Userinfo&a=get_code&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}&cardid={pigcms:$cardid}', {phone:phone},
-			function(data) {
-				if(data.error == 0){
-					$('#num').html('60');
-					$('.is_check>b').html('后重新获取');
-					count_down();
-				}else{
-					alert(data.info);
-				}
-			},"json");
+	$('.is_check').click(function(){
+		if($('#num').html() != ''){
+			return false;
 		}
-	 }
+		var phone 	= $('#tel').val();
+		reg=/^0{0,1}(13[0-9]|145|15[0-9]|16[0-9]|17[0-9]|18[0-9])[0-9]{8}$/i;
+		 if(!reg.test(phone)){   
+			alert("错误,请输入11位的手机号！");
+			$('#tel').css('background','red');
+			return;
+		 }else{
+			var num = $('#num').html();
+			if(num == ''){
+				$.post('index.php?g=Wap&m=Userinfo&a=get_code&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}&cardid={pigcms:$cardid}', {phone:phone},
+				function(data) {
+					if(data.error == 0){
+						$('#num').html('60');
+						$('.is_check>b').html('后重新获取');
+						count_down();
+					}else{
+						alert(data.info);
+					}
+				},"json");
+			}
+		 }
+	});
 });
 
-var editobj;
-$(document).on("click",".edit_gray",function () { 
-	editobj=$(this);
-	var carnumber = $(this).parent().siblings().slice(1, 2).find("font").text();
-	var cartype = $(this).parent().siblings().slice(2, 3).find("font").text();
-	var shortname=sb_substr(carnumber,0,1);
-	carnumber=sb_substr(carnumber,1);
-	
-	$("#carnumber").val(carnumber);
-	$("#cartype").val(cartype);
-	$("#shortname").val(shortname);
-	$("#addbtn,#addcarli").hide();
-	$("#repairbtn").show();
-	$("#carfm").show();
-} );
-$("#addcarli").click( function () { 
-	$("#addcarli,#repairbtn").hide();
-	$("#addbtn").show();
-	$("#cartype").val("");
-	$("#carnumber").val("");
-	$("#carfm").show();
-} );
-$("#dropbtn").click( function () { 
-	$("#carfm").hide();
-	$("#addcarli").show();
-    $("#repairbtn,#addbtn").hide();
-} );
-$(document).on("click", ".del_gray",function () { 
-	var carid   = $(this).text();
-	var thisobj=$(this);
-	var submitData = {
-	carid : carid,
-	action: "delcar"
-    };
-	art.dialog({
-				title:'消息提醒',
-				content: '确定要删除掉此车辆吗？',
-				ok: function () {
-					$.post('index.php?g=Wap&m=Userinfo&a=delcar&token={pigcms:$Think.get.token}&wecha_id={pigcms:$Think.get.wecha_id}&cardid={pigcms:$Think.get.cardid}&telcheck='+telcheck, 
-					submitData,
-					function(data) {
-						if(data.flag=='ok'){
-							$(thisobj).parents('ul').remove();
-							alert('车辆删除成功！');
-							}else{
-							alert('车辆删除失败！');
-							}
-					},
-					"json");
-				},   
-				cancelVal: '取消',   
-				cancel: true //为true等价于function(){}  
-			});
-	
-} );
-$("#repairbtn").click( function () { 
-	var shortname = $("#shortname").val();
-	var carnumber = $("#carnumber").val();
-	var cartype   = $("#cartype").val();
-	var carid   = $(editobj).text();
-	
-//	var sex 	  = $("input:radio[name='sex']:checked").val();
-	var submitData = {
-	cartype : cartype,
-	shortname : shortname,
-	carnumber : carnumber,
-	carid : carid,
-	action: "savecar"
-    };
-	$.post('index.php?g=Wap&m=Userinfo&a=savecar&token={pigcms:$Think.get.token}&wecha_id={pigcms:$Think.get.wecha_id}&cardid={pigcms:$Think.get.cardid}&telcheck='+telcheck, 
-	submitData,
-    function(data) {
-		if(data.flag=='ok'){
-			$("#carfm").hide();
-			$("#addcarli").show();
-			$("#repairbtn,#addbtn").hide();		
-			$(editobj).parent().siblings().slice(1, 2).find("font").text(shortname+carnumber);
-			$(editobj).parent().siblings().slice(2, 3).find("font").text(cartype);
-			alert('修改车辆成功！');
-		}else if(data.flag=='no'){
-			alert('车牌号重复，请换其他车牌！');
-		}else{
-			alert('车牌号无效！');
-		}
-	},
-	"json");
-} );
-$("#addbtn").click( function () { 
-	var shortname = $("#shortname").val();
-	var carnumber = $("#carnumber").val();
-	var cartype   = $("#cartype").val();
-//	var sex 	  = $("input:radio[name='sex']:checked").val();
-	var submitData = {
-	cartype : cartype,
-	shortname : shortname,
-	carnumber : carnumber,
-	action: "addcar"
-    };
-	$.post('index.php?g=Wap&m=Userinfo&a=addcar&token={pigcms:$Think.get.token}&wecha_id={pigcms:$Think.get.wecha_id}&cardid={pigcms:$Think.get.cardid}&telcheck='+telcheck, 
-	submitData,
-    function(data) {
-		if(data.flag=='ok'){	
-			$("#addcarli").before(holdhtml(data.car.carnumber,data.car.cartype,data.car.id));
-			$("#carfm").hide();
-			$("#addcarli").show();
-			$("#repairbtn,#addbtn").hide();	
-			alert('添加车辆成功！');
-		}else if(data.flag=='no'){	
-			$("#addcarli").before(holdhtml(data.car.carnumber,data.car.cartype,data.car.id));
-			$("#carfm").hide();
-			$("#addcarli").show();
-			$("#repairbtn,#addbtn").hide();	
-			alert('添加车辆成功！');
-		}else{
-			alert('车牌号无效！');
-		}
-	},
-	"json");
-} );
+
+
 $("input[type=text]").focus(function(){
   $(this).css("background-color","#FFF");
 });
-$("#tel,#carnumber").blur( function () { 
-	var tel 	  = $("#tel").val();
-	var shortname = $("#shortname").val();
-	var carnumber = $("#carnumber").val();
-	var submitData = {
-	tel 	  : tel,
-	shortname : shortname,
-	carnumber : carnumber,
-	action: "getuserinfo"
-    };
-	$.post('index.php?g=Wap&m=Userinfo&a=getuserinfo&token={pigcms:$Think.get.token}&wecha_id={pigcms:$Think.get.wecha_id}&cardid={pigcms:$Think.get.cardid}&telcheck='+telcheck, 
-	submitData,
-    function(data) {
-		if($("#carnumber").val()==''&&data['car']&&data['car'].carnumber!=''){
-			$("#carnumber").val(data['car'].carnumber);
-			$("#shortname").val(data['car'].shortname);
-		}
-		if($("#cartype").val()==''&&data['car']&&data['car'].cartype!=''){
-			$("#cartype").val(data['car'].cartype);
-		}
-		if($("#tel").val()==''&&data['user']&&data['user'].tel!=''){
-			$("#tel").val(data['user'].tel);
-		}
-		if($("#truename").val()==''&&data['user']&&data['user'].truename!=''){
-			$("#truename").val(data['user'].truename);
-			$("input[name='sex'][value="+data['user'].sex+"]").attr("checked",true); 
-		}
-		if($("#beizhu").val()==''&&data['user']&&data['user'].beizhu!=''){
-			$("#beizhu").val(data['user'].beizhu);
-		}
-		if($("#address").val()==''&&data['user']&&data['user'].address!=''){
-			$("#address").val(data['user'].address);
-		}
-	},
-	"json");
-} );
+
 var telcheck=0;
-$("#showcard").bind("click",
-function() {
+$("#showcard").bind("click",function() {
     var btn = $(this);
     var wechaname = $("#wechaname").val();
 	var tel 	  = $("#tel").val();
-	var shortname = $("#shortname").val();
-	var carnumber = $("#carnumber").val();
 	var address   = $("#address").val();
-	var cartype   = $("#cartype").val();
 	var truename  = $("#truename").val();
 	var qq 		  = $("#qq").val();
 	var beizhu	  = $("#beizhu").val();
-	var sex 	  = $("input:radio[name='sex']:checked").val();
-	var birthday  = $("#birthday").val();	
+	var sex 	  = $("input:radio[name='sex']:checked").val();	
 	var address   = $("#address").val();
 	var info  	  = $("#info").val();
-	var bornyear  = $("#bornyear").val();
-	var bornmonth = $("#bornmonth").val();
-	var bornday   = $("#bornday").val();
 	var portrait  = $("#portrait").val();
-	var paypass   = $("#paypass").val();
 	var code   	  = $("#code").val();
 
 
-<if condition="$cardid neq '' && $conf['tel'] eq 0 && $cardInfo eq false"><else />	
-    if (tel == '') {
-        alert("请认真输入手机号");
-		document.getElementById('tel').style.background="red";
-		$("#tel").focus();
-        return ;
-    }
-	reg=/^0{0,1}(13[0-9]|145|15[0-9]|16[0-9]|17[0-9]|18[0-9])[0-9]{8}$/i;
-	  if(!reg.test(tel)){   
-			alert("错误,请输入11位的手机号！");
+	<if condition="$cardid neq '' && $conf['tel'] eq 0 && $cardInfo eq false"><else />	
+	    if (tel == '') {
+	        alert("请认真输入手机号");
 			document.getElementById('tel').style.background="red";
-			return;
-	 }
-</if>
-
-<if condition="$cardid neq '' && $conf['wechaname'] eq 0 && $cardInfo eq false"><else />    
-    if (wechaname == '') {
-        alert("请认真输入微信号");
-		$("#wechaname").focus();
-        return ;
-    }
-</if>
-<if condition="$cardid neq '' && $conf['truename'] eq 0 && $cardInfo eq false"><else />    
-    if (truename == '') {
-        alert("请输入您的真实姓名");
-		$("#truename").focus();
-        return ;
-    }
-</if>
-
-<if condition="$fans.id eq '' and $is_check eq '1' or $_GET['telcheck'] eq '1'">
-	if (code == '') {
-			alert("请输入您的手机验证码");
-			$("#code").focus();
-			return ;
-		}
-</if>
-    var submitData = {
+			$("#tel").focus();
+	        return ;
+	    }
+		reg=/^0{0,1}(13[0-9]|145|15[0-9]|16[0-9]|17[0-9]|18[0-9])[0-9]{8}$/i;
+		  if(!reg.test(tel)){   
+				alert("错误,请输入11位的手机号！");
+				document.getElementById('tel').style.background="red";
+				return;
+		 }
+	</if>
+	
+	<if condition="$cardid neq '' && $conf['wechaname'] eq 0 && $cardInfo eq false"><else />    
+	    if (wechaname == '') {
+	        alert("请认真输入微信号");
+			$("#wechaname").focus();
+	        return ;
+	    }
+	</if>
+	<if condition="$cardid neq '' && $conf['truename'] eq 0 && $cardInfo eq false"><else />    
+	    if (truename == '') {
+	        alert("请输入您的真实姓名");
+			$("#truename").focus();
+	        return ;
+	    }
+	</if>
+	
+	<if condition="$fans.id eq '' and $is_check eq '1' or $_GET['telcheck'] eq '1'">
+		if (code == '') {
+				alert("请输入您的手机验证码");
+				$("#code").focus();
+				return ;
+			}
+	</if>
+	var submitData = {
         wechaname : wechaname,
         tel 	  : tel,
-		carnumber : carnumber,
-		address   : address,
-		cartype   : cartype,
-		shortname : shortname,
+		address   : address,		
         truename  : truename,
         qq        : qq,
 		beizhu    : beizhu,
-        sex 	  : sex,
-        birthday  : birthday,
+        sex 	  : sex,      
         address   : address,
-        info 	  : info,
-        bornyear  : bornyear,
-        bornmonth : bornmonth,
-        bornday   : bornday,
+        info 	  : info,     
         cardid 	  : {pigcms:$cardid},
         portrait  : portrait,
-        paypass   : paypass,
         code	  : code,
         action: "index"
     };
@@ -637,7 +317,7 @@ function() {
 			//location.href = "{pigcms::U('Card/card',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'cardid'=>$_GET['cardid']))}";
 			art.dialog({
 				title:'消息提醒',
-				content: '成功领取了会员卡！',
+				content: '恭喜您成为本站的会员！',
 				ok: function () {
 					location.href ="{pigcms::U('Card/card',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'cardid'=>$_GET['cardid']))}";
 				}
@@ -684,11 +364,7 @@ function() {
 
 
 });
-function holdhtml(carnumber,cartype,id){
-    var htmlhold='<ul class="round"><li><table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang"><tr><th style="width:35px;"></th><td style="height:40px; width:100px;line-height:40px;"><font>'+carnumber+'</font></td><td><font>'+cartype+'</font></td><td style="width:60px;"><i class="icon18_common edit_gray">'+id+'</i>&nbsp;&nbsp;&nbsp;<i class="icon18_common del_gray">'+id+'</i></td></tr></table></li></ul>'; 
-	return htmlhold;
-}
-	function count_down(){
+function count_down(){
 		var down = setInterval(function(){
 			var num 	= $('#num').html();
 			if(num > 0){
@@ -699,89 +375,20 @@ function holdhtml(carnumber,cartype,id){
 				clearInterval(down);
 			}
 		},1000);
-	}
-	function check1(obj,stext){	 
+}
+function check1(obj,stext){	 
 	if(obj.value == ''){
 		alert(stext);
 		document.getElementById(obj.id).style.background="red";
 		return;
 	}
-	}
+}
 	
-	function check2(obj){   
+function check2(obj){   
 		document.getElementById(obj.id).style.background="white";  
-	}
-	});
+}
 </script>	
-<script type="text/javascript">
-//得到字符总数
-function getChars(str) {
-    var i = 0;
-    var c = 0.0;
-    var unicode = 0;
-    var len = 0;
-    if (str == null || str == "") {
-        return 0;
-    }
-    len = str.length;
-    for (i = 0; i < len; i++) {
-        unicode = str.charCodeAt(i);
-        if (unicode < 127) { //判断是单字符还是双字符
-            c += 1;
-        } else { //chinese
-            c += 2;
-        }
-    }
-    return c;
-}
-function sb_strlen(str) {
-    return getChars(str);
-}
-//截取字符
-function sb_substr(str, startp, endp) {
-    var i = 0;
-    c = 0;
-    unicode = 0;
-    rstr = '';
-    var len = str.length;
-    var sblen = sb_strlen(str);
-    if (startp < 0) {
-        startp = sblen + startp;
-    }
-    if (endp < 1) {
-        endp = sblen + endp; // - ((str.charCodeAt(len-1) < 127) ? 1 : 2);
-    }
-    // 寻找起点
-    for (i = 0; i < len; i++) {
-        if (c >= startp) {
-            break;
-        }
-        var unicode = str.charCodeAt(i);
-        if (unicode < 127) {
-            c += 1;
-        } else {
-            c += 2;
-        }
-    }
-    // 开始取
-    for (i = i; i < len; i++) {
-        var unicode = str.charCodeAt(i);
-        if (unicode < 127) {
-            c += 1;
-        } else {
-            c += 2;
-        }
-        rstr += str.charAt(i);
-        if (c >= endp) {
-            break;
-        }
-    }
-    return rstr;
-}
-</script>
-
 </div>
 <include file="Card:bottom"/>
-<include file="Card:share"/>
-</body>
+ </body>
 </html>

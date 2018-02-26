@@ -101,7 +101,17 @@ function load_runtime_file() {
     }
     // 加载系统类库别名定义
     alias_import(include THINK_PATH.'Conf/alias.php');
-
+/*     return array(
+    		'Model'         => CORE_PATH.'Core/Model.class.php',
+    		'Db'            => CORE_PATH.'Core/Db.class.php',
+    		'Log'          	=> CORE_PATH.'Core/Log.class.php',
+    		'ThinkTemplate' => CORE_PATH.'Template/ThinkTemplate.class.php',
+    		'TagLib'        => CORE_PATH.'Template/TagLib.class.php',
+    		'Cache'         => CORE_PATH.'Core/Cache.class.php',
+    		'Widget'        => CORE_PATH.'Core/Widget.class.php',
+    		'TagLibCx'      => CORE_PATH.'Driver/TagLib/TagLibCx.class.php',
+    ); */
+ 
     // 检查项目目录结构 如果不存在则自动创建
     if(!is_dir(LIB_PATH)) {
         // 创建项目目录结构

@@ -563,7 +563,7 @@ public function saveUser(){
 			$where['is_use']='0'; 
     		$codedb=$code_db->where($where)->save(array('is_use'=>'1'));
     		if($code_db->add($data)){
-    			$msg 	= '您的验证码为：'.$code.'，5分钟内有效，谢谢！【星意汽车】';
+    			$msg 	= '您的验证码为：'.$code.'，5分钟内有效，谢谢！【谛悟科技】';
     			$result['error']	= 0;
     			$result['info']		= '';
     			

@@ -69,6 +69,7 @@ abstract class Action {
      * 获取当前Action名称
      * @access protected
      */
+    //IndexAction
     protected function getActionName() {
         if(empty($this->name)) {
             // 获取Action名称

@@ -1001,7 +1001,7 @@ class Member_cardAction extends UserAction{
 		
 			if($db->create() === false) $this->error($db->getError());
 			$id = (int)$_POST['uid'];
-			if($db->where(array('token'=>$this->token,'id'=>$id))->setInc('balance',$_POST['price'])){
+			if($db->where(array('token'=>$this->token,'id'=>$id))->setInc('total_coin',$_POST['price'])){
 				$orderid = date('YmdHis',time()).mt_rand(1000,9999);
 				M('Member_card_pay_record')->add(array('orderid' => $orderid , 'ordername' => 'PC管理后台手动充值' , 'createtime' => time() , 'token' => $this->token , 'wecha_id' => $uinfo['wecha_id'] , 'admin_wecha_id' =>session('uid') , 'adminname' => session('uname') ,'price' => $_POST['price'] , 'type' => 1 , 'paid' => 1 , 'module' => 'Card' , 'paytime' => time() , 'paytype' => 'recharge'));
 				$uinfo = $db->where(array('token'=>$this->token,'id'=>$uid))->find();

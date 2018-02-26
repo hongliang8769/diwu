@@ -32,7 +32,7 @@ a.a_upload,a.a_choose{border:1px solid #3d810c;box-shadow:0 1px #CCCCCC;-moz-box
 </style>
  <script src="{pigcms::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
  <if condition="session('isQcloud') eq true">
- <link type="text/css" rel="stylesheet" href="http://qzonestyle.gtimg.cn/qcloud/app/open/v1/css/wxcloud.min.css" />
+ <link type="text/css" rel="stylesheet" href="{pigcms:$staticPath}{pigcms::ltrim(RES,'.')}/css/wxcloud.min.css" />
 
 
 <style>
@@ -358,10 +358,10 @@ array(
 array('name'=>'在线支付设置','link'=>U('Alipay_config/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Alipay_config')),
 array('name'=>'平台支付对帐','link'=>U('Platform/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Platform')),
 array('name'=>'微信团购系统','link'=>U('Groupon/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Groupon')),
-array('name'=>'微信商城系统','link'=>U('Store/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Store')),
-array('name'=>'商城分佣管理','link'=>U('Store/twitter',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Store','a'=>'twitter')),
+array('name'=>'微信商城系统','link'=>U('Store/setting',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Store')),
+//array('name'=>'商城分佣管理','link'=>U('Store/twitter',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Store','a'=>'twitter')),
 array('name'=>'微商圈','link'=>U('Market/index',array('token'=>$token)),'test'=>0,'selectedCondition'=>array('m'=>'Market')),
-//array('name'=>'淘宝天猫店铺配置','link'=>U('Taobao/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Taobao')),
+array('name'=>'淘宝天猫店铺配置','link'=>U('Taobao/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Taobao')),
 )),
 array(
 'name'=>'微游戏',
@@ -370,15 +370,14 @@ array(
 'subs'=>array(
 array('name'=>'信息设置','link'=>U('Game/config',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Game','a'=>'config')),
 array('name'=>'我的游戏','link'=>U('Game/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Game','a'=>'index')),
-array('name'=>'游戏库','link'=>U('Game/gameLibrary',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Game','a'=>'gameLibrary')),
+//array('name'=>'游戏库','link'=>U('Game/gameLibrary',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Game','a'=>'gameLibrary')),
 array('name'=>'外链游戏','link'=>U('Youxi/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Youxi')),
 array('name'=>'2048虐心版','link'=>U('Gamet/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Gamet')),
 array('name'=>'Flappy 2048','link'=>U('Gamett/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Gamett')),
 array('name'=>'吃粽子大赛','link'=>U('Czz/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Czz')),
-array('name'=>'朋友圈游戏','link'=>U('Taobao/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Taobao')),
 )),
 array(
-'name'=>'微粉丝管理CRM',
+'name'=>'粉丝管理',
 'iconName'=>'crm',
 'display'=>0,
 'subs'=>array(
@@ -421,27 +420,28 @@ array(
 'iconName'=>'active',
 'display'=>0,
 'subs'=>array(
+array('name'=>'娃娃机','link'=>U('Wawaji/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Wawaji')),
 array('name'=>'幸运大转盘','link'=>U('Lottery/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Lottery')),
 array('name'=>'优惠券','link'=>U('Coupon/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Coupon')),
 array('name'=>'刮刮卡','link'=>U('Guajiang/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Guajiang')),
-array('name'=>'幸运水果机','link'=>U('LuckyFruit/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'LuckyFruit')),
-array('name'=>'砸金蛋','link'=>U('GoldenEgg/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'GoldenEgg')),
-array('name'=>'走鹊桥','link'=>U('AppleGame/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'AppleGame')),
-array('name'=>'摁死小情侣','link'=>U('Lovers/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Lovers')),
-array('name'=>'中秋吃月饼','link'=>U('Autumn/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Autumn')),
-array('name'=>'拆礼盒','link'=>U('Autumns/index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Autumns')),
-array('name'=>'一战到底','link'=>U('Problem/index',array('token'=>$token)),'new'=>1,'test'=>0,'selectedCondition'=>array('m'=>'Problem')),
-array('name'=>'微信红包','link'=>U('Red_packet/index',array('token'=>$token)),'new'=>1,'test'=>0,'selectedCondition'=>array('m'=>'Red_packet')),
-array('name'=>'惩罚台','link'=>U('Punish/index',array('token'=>$token)),'new'=>1,'test'=>0,'selectedCondition'=>array('m'=>'Punish')),
+array('name'=>'幸运水果机','link'=>U('LuckyFruit/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'LuckyFruit')),
+array('name'=>'砸金蛋','link'=>U('GoldenEgg/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'GoldenEgg')),
+array('name'=>'走鹊桥','link'=>U('AppleGame/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'AppleGame')),
+array('name'=>'摁死小情侣','link'=>U('Lovers/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Lovers')),
+array('name'=>'中秋吃月饼','link'=>U('Autumn/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Autumn')),
+array('name'=>'拆礼盒','link'=>U('Autumns/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Autumns')),
+array('name'=>'一战到底','link'=>U('Problem/index',array('token'=>$token)),'new'=>0,'test'=>0,'selectedCondition'=>array('m'=>'Problem')),
+array('name'=>'微信红包','link'=>U('Red_packet/index',array('token'=>$token)),'new'=>0,'test'=>0,'selectedCondition'=>array('m'=>'Red_packet')),
+array('name'=>'惩罚台','link'=>U('Punish/index',array('token'=>$token)),'new'=>0,'test'=>0,'selectedCondition'=>array('m'=>'Punish')),
 )),
 array(
-'name'=>'会员卡',
+'name'=>'会员中心',
 'iconName'=>'card',
 'display'=>0,
 'subs'=>array(
-array('name'=>'会员卡','link'=>U('Member_card/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card'),'exceptCondition'=>array('a'=>'replyInfoSet,focus,custom,center')),
-array('name'=>'会员中心','link'=>U('Member_card/center',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card','a'=>'center')),
-array('name'=>'预约系统','link'=>U('Repast/company_index',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Repast')),
+array('name'=>'会员设置','link'=>U('Member_card/index',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card'),'exceptCondition'=>array('a'=>'replyInfoSet,focus,custom,center')),
+array('name'=>'会员列表','link'=>U('Member_card/center',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card','a'=>'center')),
+array('name'=>'游戏币管理','link'=>U('Repast/dish',array('token'=>$token)),'new'=>1,'selectedCondition'=>array('m'=>'Repast')),
 array('name'=>'回复设置','link'=>U('Member_card/replyInfoSet',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card','a'=>'replyInfoSet')),
 array('name'=>'幻灯片广告','link'=>U('Member_card/focus',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card','a'=>'focus')),
 array('name'=>'自定义输入项','link'=>U('Member_card/custom',array('token'=>$token)),'new'=>0,'selectedCondition'=>array('m'=>'Member_card','a'=>'custom')),
@@ -649,7 +649,7 @@ foreach ($menus as $m){
 			}
 
 			if ($s['name']=='模板管理'&&is_dir($_SERVER['DOCUMENT_ROOT'].'/cms')&&!strpos($_SERVER['HTTP_HOST'],'pigcms')){
-				echo '<li class="subCatalogList"> <a href="/index.php?g=User&m=AdvanceTpl&a=index">高级模板</a><span class="new"></span></li>';
+				//echo '<li class="subCatalogList"> <a href="/index.php?g=User&m=AdvanceTpl&a=index">高级模板</a><span class="new"></span></li>';
 			}
 			if ($s['name']=='底部导航菜单'){
 				echo '<li class="subCatalogList"> <a href="index.php?g=User&m=Demo&a=index&token='.$token.'&url=index.php%3Fg%3DWap%26m%3DIndex%26a%3Dindex%26token%3D'.$token.'%26wecha_id%3D%7Bwechat_id%7D" target="_blank">预览网站<span class="new"></span></a></li>';

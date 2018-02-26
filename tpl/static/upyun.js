@@ -54,5 +54,5 @@ function editClass(domid,domid2,cid){
 
 function memberCardRecharge(uid){
 	art.dialog.data('uid', uid);
-	art.dialog.open('?g=User&m=Member_card&a=recharge&uid='+uid,{lock:true,title:'充值会员卡',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.45});
+	art.dialog.open('?g=User&m=Member_card&a=recharge&uid='+uid,{lock:true,title:'充值游戏币',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.45});
 }

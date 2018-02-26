@@ -3,9 +3,9 @@ return array (
   'DB_TYPE' => 'mysql',
   'DB_HOST' => '127.0.0.1',
   'DB_PORT' => '3306',
-  'DB_NAME' => 'weixin18',
+  'DB_NAME' => 'wxdiwu',
   'DB_USER' => 'root',
-  'DB_PWD' => 'b70d4e3008',
+  'DB_PWD' => 'root',
   'DB_PREFIX' => 'tp_',
   'agent_version' => 1,
 );

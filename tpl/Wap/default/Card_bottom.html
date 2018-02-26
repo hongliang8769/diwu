@@ -1,40 +1,9 @@
-<style>
-.footermenu a:visited p ,.footermenu a p{
-     color: #fff; 
-    font-weight:normal; 
-}
-.footermenu a.active p{
-    color: #2489ce;
-    font-weight: 700; 
-}
-</style>
-<div style="height:40px;"></div>
-<div class="footermenu">
-    <ul>
-    <li>
-        <a <php>if(ACTION_NAME=='card'||MODULE_NAME=='Userinfo'){</php>class="active"<php>}</php> href="/index.php?g=Wap&m=Card&a=card&token={pigcms:$_GET['token']}&cardid={pigcms:$_GET['cardid']|intval}&wecha_id={pigcms:$_GET['wecha_id']}">
-            <img src="{pigcms::RES}/card/images/my.png">
-            <p>会员卡</p>
-            </a>
-        </li>
-    <li>
-            <a <php>if(ACTION_NAME=='my_coupon'){</php>class="active"<php>}</php> href="/index.php?g=Wap&m=Card&a=my_coupon&token={pigcms:$_GET['token']}&cardid={pigcms:$_GET['cardid']|intval}&wecha_id={pigcms:$_GET['wecha_id']}">
-            <img src="{pigcms::RES}/card/images/home.png">
-            <p>优惠活动</p>
-            </a>
-        </li>
-        <li>
-            <a <php>if(ACTION_NAME=='dish'){</php>class="active"<php>}</php> href="{pigcms::U('Repast/dish', array('token'=>$token, 'wecha_id'=>$wecha_id, 'cid'=>$cid))}">
-            <img src="{pigcms::RES}/card/images/detaila.png">
-            <p>项目预约</p>
-            </a>
-        </li>
-        <li>
-            <a  <php>if(ACTION_NAME=='myOrder'){</php>class="active"<php>}</php> href="{pigcms::U('Repast/myOrder', array('token'=>$token, 'wecha_id'=>$wecha_id, 'cid'=>$cid))}">
-            <img src="{pigcms::RES}/card/images/c.png">
-            <p>收银台</p>
-            </a>
-        </li>
-    </ul>
-</div>
-<!--禁用微信分享按钮-->
+<div class="copyright">
+<if condition="$iscopyright eq 1">
+{pigcms:$homeInfo.copyright}
+<else/>
+{pigcms:$siteCopyright}
+</if>
+</div>  <include file="Index:styleInclude"/><include file="$cateMenuFileName"/> 
+<!-- share -->
+<include file="Index:share" />

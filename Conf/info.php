@@ -1,18 +1,18 @@
-<?php
+<?php 
 return array (
   'site_name' => '微信平台',
   'site_title' => '纽曼微信公众服务平台',
-  'site_logo' => 'http://car.newsmy.com/image/logo.gif',
-  'site_url' => 'http://localhost',
-  'site_my' => '纽曼导航',
+  'site_logo' => 'http://my.newsmy-car.com/uploads/h/hhsttb1437634887/0/c/d/d/thumb_5a6588c117bfe.png',
+  'site_url' => 'http://my.newsmy-car.com',
+  'site_my' => '谛悟科技',
   'server_key' => 'bc9ed510a91c14331cf2f6ce4169807b',
-  'server_topdomain' => 'shop.newsmy.com',
+  'server_topdomain' => 'my.newsmy-car.com',
   'connectout' => '用户已到期，请联系管理员或客服充值',
   'ischeckuser' => 'false',
   'reg_needmp' => 'false',
   'open_biz' => '0',
   'isclosekuser' => 'true',
-  'server_discuz' => 'http://www.newsmy-car.com/bbs',
+  'server_discuz' => 'http://my.newsmy-car.com/bbs',
   'reg_groupid' => '4',
   'reg_validdays' => '365',
   'router_key' => '2b79c282b0f365ca9782cceb499e6022',
@@ -32,4 +32,3 @@ return array (
   'ucenter_db_set' => '',
   'ucenter_web_set' => '',
 );
-?>

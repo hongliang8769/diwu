@@ -176,10 +176,10 @@ class StoreAction extends WapAction{
 		
 		include('./PigCms/Lib/ORG/index.Tpl.php');
 		include('./PigCms/Lib/ORG/cont.Tpl.php');
-		$catemenu[0] = array('id' => 0, 'name' => '所有商品', 'picurl' => '/tpl/static/store/m-act-cat.png', 'k' => 0, 'vo' => array(), 'url' => U('Store/cats', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
-		$catemenu[1] = array('id' => 1, 'name' => '购物车', 'picurl' => '/tpl/static/store/m-act-cart.png', 'k' => 1, 'vo' => array(), 'url' => U('Store/cart', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
-		$catemenu[2] = array('id' => 2, 'name' => '查物流', 'picurl' => '/tpl/static/store/m-act-wuliu.png', 'k' => 2, 'vo' => array(), 'url' => U('Store/my', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
-		$catemenu[3] = array('id' => 3, 'name' => '用户中心', 'picurl' => '/tpl/static/store/user2.png', 'k' => 3, 'vo' => array(), 'url' => U('Store/myinfo', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
+		$catemenu[0] = array('id' => 0, 'name' => '所有商品', 'picurl' => '/tpl/user/default/common/images/photo/plugmenu10.png', 'k' => 0, 'vo' => array(), 'url' => U('Store/cats', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
+		$catemenu[1] = array('id' => 1, 'name' => '购物车', 'picurl' => '/tpl/user/default/common/images/photo/plugmenu9.png', 'k' => 1, 'vo' => array(), 'url' => U('Store/cart', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
+		$catemenu[2] = array('id' => 2, 'name' => '查物流', 'picurl' => '/tpl/user/default/common/images/photo/plugmenu3.png', 'k' => 2, 'vo' => array(), 'url' => U('Store/my', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
+		$catemenu[3] = array('id' => 3, 'name' => '用户中心', 'picurl' => '/tpl/user/default/common/images/photo/plugmenu2.png', 'k' => 3, 'vo' => array(), 'url' => U('Store/myinfo', array('token'=> $this->token,'wecha_id'=> $this->wecha_id,'cid' => $this->_cid)));
 		$this->assign('catemenu', $catemenu);
 		$set = M("Product_setting")->where(array('token' => $this->token, 'cid' => $this->_cid))->find();
 		if (isset($tpl[$set['tpid'] - 1]['tpltypename'])) {

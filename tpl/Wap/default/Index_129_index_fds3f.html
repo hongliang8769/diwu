@@ -19,6 +19,7 @@
 <script type="text/javascript" src="{pigcms::RES}/css/129/swipe.js"></script>
 <script type="text/javascript" src="{pigcms::RES}/css/129/zepto.js"></script>
 
+
     </head>
     <body onselectstart="return true;" ondragstart="return false;">
 <!--背景音乐-->
@@ -33,10 +34,10 @@
     -->
     <div style="-webkit-transform:translate3d(0,0,0);">
         <div id="banner_box" class="box_swipe" style="visibility: visible;">
-            <ul style="list-style: none; transition: 0ms; -webkit-transition: 0ms; -webkit-transform: translate3d(0, 0, 0);">
+            <ul id="scroller" style="list-style: none; transition: 0ms; -webkit-transition: 0ms; -webkit-transform: translate3d(0, 0, 0);">
             <volist name="flash" id="so">
                     <li style=" vertical-align: top;">
-                                <a href="{pigcms:$so.url}">
+                              <a href="{pigcms:$so.url}">
                                     <img src="{pigcms:$so.img}" style="width:100%;">
                                 </a>
                     </li>

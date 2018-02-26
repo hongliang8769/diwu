@@ -11,9 +11,9 @@ class WeixinAction extends Action{
 	public $user;
 	public $ali;
 	public function index(){
-		$this->ali=0;
+		$this->ali=false;
 		if (isset($_GET['ali'])&&intval($_GET['ali'])){
-			$this->ali=1;
+			$this->ali=true;
 		}
 		$this->siteUrl=C('site_url');
 		if (!class_exists('SimpleXMLElement')){
@@ -61,6 +61,7 @@ class WeixinAction extends Action{
 		$this->fun=$open['queryname'];
 
 		if (!$this->ali){
+			//$weixin->requestdataext(json_encode($this->reply($data)));
 			list($content, $type) = $this->reply($data);
 			$weixin->response($content, $type);
 		}else {
@@ -555,7 +556,7 @@ class WeixinAction extends Action{
 				break;
 			case '微商圈':
 				$thisItem=M('Market')->where(array('token'=>$this->token))->find();
-				return array(array(array($thisItem['title'],$thisItem['address'],$thisItem['logo_pic'],U('Wap/Market/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']))),true,false,true),'news');
+				return array(array(array($thisItem['title'],$thisItem['address'],$thisItem['logo_pic'],U('Wap/Market/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']),true,false,true))),'news');
 				break;
 			case '微房产': $Estate = M('Estate') -> where(array('token' => $this -> token)) -> find();
 				return array(array(array($Estate['title'], str_replace('&nbsp;', '', strip_tags(htmlspecialchars_decode($Estate['estate_desc']))), $Estate['cover'], $this -> siteUrl . '/index.php?g=Wap&m=Estate&a=index&&token=' . $this -> token . '&wecha_id=' . $this -> data['FromUserName'] . '&hid=' . $Estate['id'] . '')), 'news');
@@ -709,7 +710,7 @@ class WeixinAction extends Action{
 					case 'Vcard': $this -> requestdata('other');
 						$vcard = M('vcard_list')->where(array('token'=>$this->token,'name'=>$key))->find();
 						if($vcard){
-							return array(array(array($vcard['name'],$vcard['work'],$vcard['image'],U('Wap/Vcard/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName'],'id'=>$vcard['id']))),true,false,true),'news');
+							return array(array(array($vcard['name'],$vcard['work'],$vcard['image'],U('Wap/Vcard/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName'],'id'=>$vcard['id']),true,false,true))),'news');
 						}
 						break;
 					case 'Paper': $this -> requestdata('other');
@@ -837,7 +838,7 @@ class WeixinAction extends Action{
 							$actid=$data['pid'];
 							$memberRecord=M('Wall_member')->where(array('act_id'=>$actid,'act_type'=>$acttype,'wecha_id'=>$this->data['FromUserName']))->find();
 							if (!$memberRecord){
-								return array(array(array($thisItem['title'],'请点击这里完善信息后再参加此活动',$picLogo,U('Wap/Scene_member/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName'],'act_type'=>$acttype,'id'=>$actid,'name'=>'wall'))),true,false,true),'news');
+								return array(array(array($thisItem['title'],'请点击这里完善信息后再参加此活动',$picLogo,U('Wap/Scene_member/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName'],'act_type'=>$acttype,'id'=>$actid,'name'=>'wall'),true,false,true))),'news');
 							}else {
 								M('Userinfo')->where(array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']))->save(array('wallopen'=>1));
 								S('fans_'.$this->token.'_'.$this->data['FromUserName'],NULL);
@@ -858,11 +859,11 @@ class WeixinAction extends Action{
 						break;
 					case 'Schoolset':
 						$thisItem=M('School_set_index')->where(array('setid'=>$data['pid']))->find();
-						return array(array(array($thisItem['title'],$thisItem['info'],$thisItem['head_url'],U('Wap/School/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']))),true,false,true),'news');
+						return array(array(array($thisItem['title'],$thisItem['info'],$thisItem['head_url'],U('Wap/School/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']),true,false,true))),'news');
 						break;
 					case 'Research':
 						$thisItem=M('Research')->where(array('id'=>$data['pid']))->find();
-						return array(array(array($thisItem['title'],$thisItem['description'],$thisItem['logourl'],U('Wap/Research/index',array('reid'=>$data['pid'],'token'=>$this->token,'wecha_id'=>$this->data['FromUserName']))),true,false,true),'news');
+						return array(array(array($thisItem['title'],$thisItem['description'],$thisItem['logourl'],U('Wap/Research/index',array('reid'=>$data['pid'],'token'=>$this->token,'wecha_id'=>$this->data['FromUserName']),true,false,true))),'news');
 						break;
 					case 'Business':
 						$this->requestdata('other');
@@ -871,7 +872,7 @@ class WeixinAction extends Action{
 						break;
 					case 'Sign':
 						$thisItem=M('Sign_set')->where(array('id'=>$data['pid']))->find();
-						return array(array(array($thisItem['title'],$thisItem['content'],$thisItem['reply_img'],U('Wap/Fanssign/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName'],'id'=>$data['pid']))),true,false,true),'news');
+						return array(array(array($thisItem['title'],$thisItem['content'],$thisItem['reply_img'],U('Wap/Fanssign/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName'],'id'=>$data['pid']),true,false,true))),'news');
 						break;
 					case 'Multi':
 						$multiImgClass=new multiImgNews($this->token,$this->data['FromUserName'],$this->siteUrl);
@@ -879,7 +880,7 @@ class WeixinAction extends Action{
 						break;
 					case 'Market':
 						$thisItem=M('Market')->where(array('market_id'=>$data['pid']))->find();
-						return array(array(array($thisItem['title'],$thisItem['address'],$thisItem['logo_pic'],U('Wap/Market/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']))),true,false,true),'news');
+						return array(array(array($thisItem['title'],$thisItem['address'],$thisItem['logo_pic'],U('Wap/Market/index',array('token'=>$this->token,'wecha_id'=>$this->data['FromUserName']),true,false,true))),'news');
 					default:
 						$replyClassName=$data['module'].'Reply';
 						if (class_exists($replyClassName)){
@@ -1807,6 +1808,7 @@ class WeixinAction extends Action{
 			$mysql->where($data)->setInc($field);
 		}
 	}
+
 	private function behaviordata($field,$id='',$type=''){
 		$data['date']=date('Y-m-d',time());
 		$data['token']=$this->token;

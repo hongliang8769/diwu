@@ -12,13 +12,9 @@
 <!--tab start-->
 <div class="tab">
 <ul>
-<if condition="$ischild neq 1"> <li class="tabli" id="tab0"><a href="{pigcms::U('Repast/company_index', array('token' => $token,'cid' => $cid))}">店面管理</a></li></if>
 <li class="current tabli" id="tab2"><a href="{pigcms::U('Repast/sort', array('token' => $token,'cid' => $cid))}">分类管理</a></li>
-<li class="tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">预约管理</a></li>
-<li class="tabli" id="tab4"><a href="{pigcms::U('Repast/dishpak', array('token' => $token,'cid' => $cid))}">套餐管理</a></li>
-<li class="tabli" id="tab5"><a href="{pigcms::U('Repast/orders', array('token' => $token,'cid' => $cid))}">订单管理</a></li>
+<li class="tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">游戏币列表</a></li>
 <li class="tabli" id="tab6"><a href="{pigcms::U('Repast/payrecord', array('token' => $token,'cid' => $cid))}">交易记录</a></li>
-<li class="tabli" id="tab6"><a href="{pigcms::U('Repast/taorecord', array('token' => $token,'cid' => $cid))}">套餐记录</a></li>
 </ul>
 </div>
 <!--tab end-->
@@ -31,11 +27,9 @@
 <table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
 <thead>
 	<tr>
-		<th class="select">选择</th>
-		<th width="300">店面名称</th>
+	
 		<th width="100">分类名称</th>
 		<th width="360">分类介绍</th>
-		<th width="100">预约项目</th>
         <th width="80">排序</th>
 		<th width="200" class="norightborder">操作</th>
 	</tr>
@@ -44,11 +38,8 @@
 <tr></tr>
 <volist name="list" id="tablelist"> 
 	<tr>
-		<td><input type="checkbox" name="del_id[]" value="285" class="checkitem"></td>
-		<td><?php echo $Companys_arr[$tablelist['cid']];?></td>
 		<td>{pigcms:$tablelist.name}</td>
 		<td>{pigcms:$tablelist.des}</td>
-		<td>{pigcms:$tablelist.num}</td>
         <td>{pigcms:$tablelist.sort}</td>
 		<td class="norightborder">
 			<a href="{pigcms::U('Repast/sortadd', array('id' => $tablelist['id'], 'token' => $token,'cid' => $tablelist['cid']))}">修改</a> 

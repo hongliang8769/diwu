@@ -419,6 +419,7 @@ function F($name, $value='', $path=DATA_PATH) {
 function get_instance_of($name, $method='', $args=array()) {
     static $_instance = array();
     $identify = empty($args) ? $name . $method : $name . $method . to_guid_string($args);
+    
     if (!isset($_instance[$identify])) {
         if (class_exists($name)) {
             $o = new $name();

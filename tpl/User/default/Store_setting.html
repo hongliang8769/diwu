@@ -6,11 +6,14 @@
  <script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
 <script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
 <script src="/tpl/static/upyun.js?{pigcms::date('YmdHis',time())}"></script>
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/cymain.css" /> 
   <div class="content"> 
    <div class="cLineB"> 
     <h4>商城设置</h4> 
-    <a href="{pigcms::U('Store/index',array('token'=>$token))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
    </div> 
+   <!--tab start-->
+<include file="Store:menu"/>
+<!--tab end-->
    <form class="form" method="post" action=""> 
     <input type="hidden" name="id" value="{pigcms:$setting.id}" /> 
     <input type="hidden" name="token" value="{pigcms:$token}" /> 

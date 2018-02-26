@@ -134,6 +134,7 @@ function file_exists_case($filename) {
  * @return boolen
  */
 function import($class, $baseUrl = '', $ext='.class.php') {
+	/*@/Action/Home/IndexAction*/
     static $_file = array();
     $class = str_replace(array('.', '#'), array('/', '.'), $class);
     if ('' === $baseUrl && false === strpos($class, '/')) {
@@ -341,15 +342,21 @@ function M($name='', $tablePrefix='',$connection='') {
  * @return Action|false
  */
 function A($name,$layer='') {
+	//  Home/Index
     static $_action = array();
     $layer      =   $layer?$layer:C('DEFAULT_C_LAYER');
+    //'DEFAULT_M_LAYER'       =>  'Model', // 默认的模型层名称
+    //'DEFAULT_C_LAYER'       =>  'Action', // 默认的控制器层名称
     if(strpos($name,'://')) {// 指定项目
         $name   =  str_replace('://','/'.$layer.'/',$name);
     }else{
         $name   =  '@/'.$layer.'/'.$name;
     }
+    /*
+      @/Action/Home/Index
+     */
     if(isset($_action[$name]))  return $_action[$name];
-    import($name.$layer);
+    import($name.$layer);/*@/Action/Home/IndexAction*/
     $class      =   basename($name.$layer);
     if(class_exists($class,false)) {
         $action             = new $class();

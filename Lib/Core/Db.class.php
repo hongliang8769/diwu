@@ -60,7 +60,7 @@ class Db {
      * @return mixed 返回数据库驱动类
      */
     public static function getInstance() {
-        $args = func_get_args();
+    	$args = func_get_args();
         return get_instance_of(__CLASS__,'factory',$args);
     }
 
@@ -72,7 +72,7 @@ class Db {
      */
     public function factory($db_config='') {
         // 读取数据库配置
-        $db_config = $this->parseConfig($db_config);
+    	$db_config = $this->parseConfig($db_config);
         if(empty($db_config['dbms']))
             throw_exception(L('_NO_DB_CONFIG_'));
         // 数据库类型
@@ -160,7 +160,7 @@ class Db {
      * @return void
      */
     protected function initConnect($master=true) {
-        if(1 == C('DB_DEPLOY_TYPE'))
+    	if(1 == C('DB_DEPLOY_TYPE'))// 'DB_DEPLOY_TYPE'        => 0, // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
             // 采用分布式数据库
             $this->_linkID = $this->multiConnect($master);
         else

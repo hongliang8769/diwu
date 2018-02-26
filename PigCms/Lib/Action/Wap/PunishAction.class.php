@@ -12,7 +12,7 @@ class PunishAction extends WapAction{
 			$this->error('活动可能还没有开启！',U('Punish/index',array('token'=>$this->token,'wecha_id'=>$this->wecha_id,'id'=>$id)));
 			exit();
 		}
-
+		
 		$this->assign('id',$id);
 		$this->assign('punish',$this->punish);
 	}

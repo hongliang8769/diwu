@@ -123,12 +123,37 @@ class Dispatcher {
             define('__INFO__',$_SERVER['PATH_INFO']);
         }
 
+        
+        /* 系统变量名称设置 */
+        /* 
+    'VAR_GROUP'             => 'g',     // 默认分组获取变量
+    'VAR_MODULE'            => 'm',		// 默认模块获取变量
+    'VAR_ACTION'            => 'a',		// 默认操作获取变量
+    'VAR_AJAX_SUBMIT'       => 'ajax',  // 默认的AJAX提交变量
+    'VAR_PATHINFO'          => 's',	// PATHINFO 兼容模式获取变量例如 ?s=/module/action/id/1 后面的参数取决于URL_PATHINFO_DEPR
+    'VAR_URL_PARAMS'        => '_URL_', // PATHINFO URL参数变量
+    'VAR_TEMPLATE'          => 't',		// 默认模板切换变量
+    'VAR_FILTERS'           =>  '',     // 全局系统变量的默认过滤方法 多个用逗号分割
+    */
+     /* 默认设定 */
+     /*
+    'DEFAULT_M_LAYER'       =>  'Model', // 默认的模型层名称
+    'DEFAULT_C_LAYER'       =>  'Action', // 默认的控制器层名称
+    'DEFAULT_APP'           => '@',     // 默认项目名称，@表示当前项目
+    'DEFAULT_THEME'         => '',	// 默认模板主题名称
+    'DEFAULT_GROUP'         => 'Home',  // 默认分组
+    'DEFAULT_MODULE'        => 'Index', // 默认模块名称
+    'DEFAULT_ACTION'        => 'index', // 默认操作名称
+    'APP_GROUP_LIST'        => 'Home,System,User,Wap,Chat',      // 项目分组设定,多个组之间用逗号分隔,例如'Home,Admin'
+    'ACTION_SUFFIX'         =>  '', // 操作方法后缀
+    'DEFAULT_FILTER'        => 'htmlspecialchars', // 默认参数过滤方法 用于 $this->_get('变量名');$this->_post('变量名')...
+     */
         // 获取分组 模块和操作名称
         if (C('APP_GROUP_LIST')) {
             define('GROUP_NAME', self::getGroup(C('VAR_GROUP')));
         }
         define('MODULE_NAME',self::getModule(C('VAR_MODULE')));
-        define('ACTION_NAME',self::getAction(C('VAR_ACTION')));
+        define('ACTION_NAME',self::getAction(C('VAR_ACTION')));//index
         // URL常量
         define('__SELF__',strip_tags($_SERVER['REQUEST_URI']));
         // 当前项目地址
@@ -141,7 +166,7 @@ class Dispatcher {
             define('__URL__',!empty($domainModule)?__APP__.'/' : __APP__.'/'.MODULE_NAME);
         }
         // 当前操作地址
-        define('__ACTION__',__URL__.$depr.ACTION_NAME);
+        define('__ACTION__',__URL__.$depr.ACTION_NAME);//'/index.php/Index/index'
         //保证$_REQUEST正常取值
         $_REQUEST = array_merge($_POST,$_GET);
     }

@@ -11,7 +11,7 @@ function drop_confirm(msg, url){
    </script>
 <div class="content">
 <div class="cLineB">
-<h4 class="left">会员中心</h4>
+<h4 class="left">会员列表</h4>
 <div class="searchbar right">
 </div>
 <div class="clr"></div>
@@ -39,12 +39,10 @@ function drop_confirm(msg, url){
 <th width="120">会员卡号</th>
 <th width="50">会员卡类型</th>
 <th width="120">手机号</th>
-<th width="90">车牌号</th>
-<th width="90">车型</th>
 <th width="100">领卡时间</th>
 <th width="80">积分</th>
+<th width="80">游戏币</th>
 <th width="80">消费</th>
-<th width="80">余额</th>
 <th width="80">操作</th>
 </tr>
 </THEAD>
@@ -60,12 +58,11 @@ function drop_confirm(msg, url){
 <TD>{pigcms:$item.cartype}</TD>
 <TD>{pigcms:$item.getcardtime|date='Y-m-d',###}</TD>
 <TD>{pigcms:$item.total_score}</TD>
+<TD>{pigcms:$item.total_coin}</TD>
 <TD>{pigcms:$item.expensetotal}</TD>
-<TD>{pigcms:$item.balance}</TD>
 <TD><a href="{pigcms::U('Member_card/useredit',array('token'=>$this->token,'wecha_id'=>$item['wecha_id'],'uid'=>$item['uid'],'itemid'=>$item['itemid'],'cid'=>$item['cid']))}"><strong>编辑</strong></a>|
 <a href="javascript:drop_confirm('您确定要删除吗?\\n\\n此操作将删除此绑定会员及关联信息，包括交易记录','/index.php?g=User&m=Member_card&a=member_del2&token={pigcms:$Think.get.token}&itemid={pigcms:$item.itemid}&id={pigcms:$item.cardid}&uid={pigcms:$item.uid}');"><strong>删除</strong></a><br>
 <a href="{pigcms::U('Member_card/member',array('token'=>$this->token,id=>$item['cardid'],'itemid'=>$item['itemid']))}"><strong>消费记录</strong></a><br>
-<a href="{pigcms::U('Member_card/centertao',array('token'=>$this->token,'wecha_id'=>$item['wecha_id'],'uid'=>$item['uid'],'itemid'=>$item['itemid'],'cid'=>$item['cid']))}"><strong>套餐记录</strong></a>
 </TD>
 </TR>
 </volist>

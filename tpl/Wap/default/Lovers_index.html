@@ -205,6 +205,13 @@ window.shareData = {
 </script>
 {pigcms:$shareScript}
 
-
+<div class="copyright">
+<if condition="$iscopyright eq 1">
+{pigcms:$homeInfo.copyright}
+<else/>
+{pigcms:$siteCopyright}
+</if>
+</div>  <include file="Index:styleInclude"/><include file="$cateMenuFileName"/> 
+<!-- share -->
 
 </body></html>

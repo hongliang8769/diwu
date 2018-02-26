@@ -120,7 +120,7 @@ if (getCookie("num")) {
     }
     if (getCookie("num") == 4){
         if (confirm("恭喜你获得一次大转盘抽奖机会,是否现在进入抽奖?\n选择确定 - 进入抽奖\n选择取消 - 留在本页")){
-            window.location.href="http://mp.weixin.qq.com/s?__biz=MzA3OTQ0NjYyNg==&mid=200762491&idx=1&sn=828bcb9785e41aa7d70402d385995025#rd";
+            window.location.href="http://mp.weixin.qq.com/s/apDyud9oUu2eLf-rF7GYMg";
         }
     }
 document.oncontextmenu = function() {

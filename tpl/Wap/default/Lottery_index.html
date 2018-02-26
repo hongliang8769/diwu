@@ -316,7 +316,7 @@ Unknown property name.-ms-filter: progid:DXImageTransform.Microsoft.gradient(Gra
 
 </style>
 <div style="height:60px;"></div>
-<div class="footFix" id="footReturn"><a href="javascript:void(0)" onClick="location.href='{pigcms::U('Wap/Index/index',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}';"><span>返回3G网站</span></a></div>
+<div class="footFix" id="footReturn"><a href="javascript:void(0)" onClick="location.href='{pigcms::U('Wap/Index/index',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}';"><span>返回</span></a></div>
 <!--footer end-->
 
 <script type="text/javascript">
@@ -556,6 +556,13 @@ window.shareData = {
             "tContent": ""
 };
 </script>
+<div class="copyright">
+<if condition="$iscopyright eq 1">
+{pigcms:$homeInfo.copyright}
+<else/>
+{pigcms:$siteCopyright}
+</if>
+</div>  <include file="Index:styleInclude"/><include file="$cateMenuFileName"/> 
 {pigcms:$shareScript}
 </body>
 </html>

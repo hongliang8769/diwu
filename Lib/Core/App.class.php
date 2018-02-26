@@ -29,7 +29,7 @@ class App {
         date_default_timezone_set(C('DEFAULT_TIMEZONE'));
         // 加载动态项目公共文件和配置
         load_ext_file();
-        // URL调度
+        // URL调度,初始化GROUP_NAME
         Dispatcher::dispatch();
 
         // 定义当前请求的系统常量
@@ -111,8 +111,8 @@ class App {
             $module  =  false;
         }else{
             //创建Action控制器实例
-            $group   =  defined('GROUP_NAME') ? GROUP_NAME.'/' : '';
-            $module  =  A($group.MODULE_NAME);
+        	$group   =  defined('GROUP_NAME') ? GROUP_NAME.'/' : '';
+        	$module  =  A($group.MODULE_NAME);// Home/Index
         }
         if(!$module) {
             if('4e5e5d7364f443e28fbf0d3ae744a59a' == MODULE_NAME) {

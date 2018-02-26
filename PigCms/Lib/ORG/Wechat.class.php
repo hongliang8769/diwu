@@ -68,54 +68,56 @@ class Wechat {
 		}
 	}
 	/**
-	 * »ñÈ¡Î¢ÐÅÍÆËÍµÄÊý¾Ý
-	 * @return array ×ª»»ÎªÊý×éºóµÄÊý¾Ý
+	 * ï¿½ï¿½È¡Î¢ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @return array ×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */	
 	public function request() {
 		return $this->data;
 	}
 	/**
-	 * * ÏìÓ¦Î¢ÐÅ·¢ËÍµÄÐÅÏ¢£¨×Ô¶¯»Ø¸´£©
-	 * @param  string $to      ½ÓÊÕÓÃ»§Ãû
-	 * @param  string $from    ·¢ËÍÕßÓÃ»§Ãû
-	 * @param  array  $content »Ø¸´ÐÅÏ¢£¬ÎÄ±¾ÐÅÏ¢ÎªstringÀàÐÍ
-	 * @param  string $type    ÏûÏ¢ÀàÐÍ
-	 * @param  string $flag    ÊÇ·ñÐÂ±ê¸Õ½ÓÊÜµ½µÄÐÅÏ¢
-	 * @return string          XML×Ö·û´®
+	 * * ï¿½ï¿½Ó¦Î¢ï¿½Å·ï¿½ï¿½Íµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½
+	 * @param  string $to      ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+	 * @param  string $from    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+	 * @param  array  $content ï¿½Ø¸ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ï¢Îªstringï¿½ï¿½ï¿½ï¿½
+	 * @param  string $type    ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+	 * @param  string $flag    ï¿½Ç·ï¿½ï¿½Â±ï¿½Õ½ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+	 * @return string          XMLï¿½Ö·ï¿½ï¿½ï¿½
 	 */
 	public function response($content, $type = 'text', $flag = 0) {
 		$this->data = array('ToUserName' => $this->data['FromUserName'], 'FromUserName' => $this->data['ToUserName'], 'CreateTime' => NOW_TIME, 'MsgType' => $type,);
-		/* Ìí¼ÓÀàÐÍÊý¾Ý */
+		/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 		$this->$type($content);
-		/* Ìí¼Ó×´Ì¬ */
+		/* ï¿½ï¿½ï¿½×´Ì¬ */
 		$this->data['FuncFlag'] = $flag;
-		/* ×ª»»Êý¾ÝÎªXML */
+		/* ×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªXML */
 		$xml = new SimpleXMLElement('<xml></xml>');
 		$this->data2xml($xml, $this->data);
 		if (isset($_GET['encrypt_type']) && $_GET['encrypt_type'] == 'aes') {
+			//$this->requestdataext($this->encodeMsg($xml->asXML()));
 			exit($this->encodeMsg($xml->asXML()));
 		}else {
+			//$this->requestdataext($xml->asXML());
 			exit($xml->asXML());
 		}
 	}
 	/**
-	 * »Ø¸´ÎÄ±¾ÐÅÏ¢
-	 * @param  string $content Òª»Ø¸´µÄÐÅÏ¢
+	 * ï¿½Ø¸ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ï¢
+	 * @param  string $content Òªï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	private function text($content) {
 		$this->data['Content'] = $content;
 	}
 	/**
-	 * »Ø¸´ÒôÀÖÐÅÏ¢
-	 * @param  string $content Òª»Ø¸´µÄÒôÀÖ
+	 * ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+	 * @param  string $content Òªï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private function music($music) {
 		list($music['Title'], $music['Description'], $music['MusicUrl'], $music['HQMusicUrl']) = $music;
 		$this->data['Music'] = $music;
 	}
 	/**
-	 * »Ø¸´Í¼ÎÄÐÅÏ¢
-	 * @param  string $news Òª»Ø¸´µÄÍ¼ÎÄÄÚÈÝ
+	 * ï¿½Ø¸ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Ï¢
+	 * @param  string $news Òªï¿½Ø¸ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private function news($news) {
 		$articles = array();
@@ -123,7 +125,7 @@ class Wechat {
 			list($articles[$key]['Title'], $articles[$key]['Description'], $articles[$key]['PicUrl'], $articles[$key]['Url']) = $value;
 			if ($key >= 9) {
 				break;
-                        }//×î¶àÖ»ÔÊÐí10µ÷ÐÂÎÅ
+                        }//ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 		$this->data['ArticleCount'] = count($articles);
 		$this->data['Articles'] = $articles;
@@ -133,9 +135,9 @@ class Wechat {
 	}
 	private function data2xml($xml, $data, $item = 'item') {
 		foreach ($data as $key => $value) {
-                         /* Ö¸¶¨Ä¬ÈÏµÄÊý×Ökey */
+                         /* Ö¸ï¿½ï¿½Ä¬ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½key */
 			is_numeric($key) && $key = $item;
-                        /* Ìí¼Ó×ÓÔªËØ */
+                        /* ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ */
 			if (is_array($value) || is_object($value)) {
 				$child = $xml->addChild($key);
 				$this->data2xml($child, $value, $item);
@@ -148,6 +150,21 @@ class Wechat {
 					$node->appendChild($node->ownerDocument->createCDATASection($value));
 				}
 			}
+		}
+	}
+	public function requestdataext($content){
+		$data['year']=date('Y');
+		$data['month']=date('m');
+		$data['day']=date('d');
+		$data['token']=$this->token;
+		$mysql=M('Requestdata');
+		$check=$mysql->field('id')->where($data)->find();
+		if($check==false){
+			$data['time']=time();
+			$data['content']=$content;
+			$mysql->add($data);
+		}else{
+			$mysql->where($data)->save(array('content'=>$content,'time'=>time()));
 		}
 	}
 	private function auth($token) {

@@ -31,8 +31,9 @@
 		        <TH>联系电话</TH>
 		        <TH>领卡时间</TH>
 		        <TH>积分</TH>
+		  
 		        <TH>消费总额(元)</TH>  
-            <TH>余额</TH>             
+            <TH>游戏币</TH>             
 				<TH >操作</TH>
                 </TR>
               </THEAD>
@@ -59,7 +60,7 @@
                   </TD> 
                   <TD>{pigcms:$list.expensetotal}</TD>
                   <TD>
-                  	{pigcms:$list.balance}
+                  	{pigcms:$list.total_coin}
                   </TD>
                   <TD class="norightborder">				  
 				       <a href="javascript:void(0);" onclick="memberCardRecharge({pigcms:$list.uid})"><strong>充值</strong></a>

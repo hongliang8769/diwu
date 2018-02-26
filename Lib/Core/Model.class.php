@@ -1133,9 +1133,9 @@ class Model {
         if(!isset($_db[$linkNum]) || (isset($_db[$linkNum]) && $config && $_linkNum[$linkNum]!=$config) ) {
             // 创建一个新的实例
             if(!empty($config) && is_string($config) && false === strpos($config,'/')) { // 支持读取配置参数
-                $config  =  C($config);
+            	$config  =  C($config);
             }
-            $_db[$linkNum]            =    Db::getInstance($config);
+            $_db[$linkNum]            =    Db::getInstance($config);//调用Db获取实例和数据库配置
         }elseif(NULL === $config){
             $_db[$linkNum]->close(); // 关闭数据库连接
             unset($_db[$linkNum]);

@@ -49,7 +49,7 @@ class Think {
     static private function buildApp() {
         // 加载底层惯例配置文件
         C(include THINK_PATH.'Conf/convention.php');
-
+       
         // 读取运行模式
         if(defined('MODE_NAME')) { // 模式的设置并入核心模式
             $mode   = include MODE_PATH.strtolower(MODE_NAME).'.php';
@@ -67,7 +67,7 @@ class Think {
 
         // 加载框架底层语言包
         L(include THINK_PATH.'Lang/'.strtolower(C('DEFAULT_LANG')).'.php');
-
+        
         // 加载模式系统行为定义
         if(C('APP_TAGS_ON')) {
             if(isset($mode['extends'])) {
@@ -84,7 +84,7 @@ class Think {
             // 默认加载项目配置目录的tags文件定义
             C('tags', include CONF_PATH.'tags.php');
         }
-
+        
         $compile   = '';
         // 读取核心编译文件列表
         if(isset($mode['core'])) {
@@ -194,14 +194,14 @@ class Think {
      * @return object
      */
     static public function instance($class,$method='') {
-        $identify   =   $class.$method;
+    	$identify   =   $class.$method;
         if(!isset(self::$_instance[$identify])) {
             if(class_exists($class)){
                 $o = new $class();
                 if(!empty($method) && method_exists($o,$method))
                     self::$_instance[$identify] = call_user_func_array(array(&$o, $method));
                 else
-                    self::$_instance[$identify] = $o;
+                	self::$_instance[$identify] = $o;
             }
             else
                 halt(L('_CLASS_NOT_EXIST_').':'.$class);

@@ -10,6 +10,7 @@ class IndexAction extends BaseAction{
 		$this->assign('includeFooterPath',$this->includePath.'Public_footer.html'); //底部公用
 
 	}
+	
 	public function clogin(){
 		$cid = isset($_GET['cid']) ? intval($_GET['cid']) : 0;
 		$k = isset($_GET['k']) ? $_GET['k'] : '';

@@ -35,25 +35,7 @@ function selectall(name) {
 <div class="clr"></div>
 </div>
 <!--tab start-->
-<div class="tab">
-<ul>
-<if condition="$isgroup neq 1 OR $ischild neq 1">
-	<li class="tabli" id="tab2"><a href="{pigcms::U('Store/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
-	<li class="current tabli" id="tab2"><a href="{pigcms::U('Store/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
-	<if condition="$isDining eq 1"><li class="tabli" id="tab2"><a href="{pigcms::U('Store/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
-	<if condition="$ischild neq 1">
-	<li class="tabli" id="tab5"><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
-	</if>
-	<if condition="$isgroup eq 1">
-	<li class="tabli" id="tab5"><a href="{pigcms::U('Store/group',array('token'=>$token))}">商品分组</a></li>
-	</if>
-<else />
-	<li class="tabli" id="tab2"><a href="{pigcms::U('Store/orders',array('token'=>$token))}">订单管理</a></li>
-</if>
-	<li class="tabli" id="tab2"><a href="{pigcms::U('Store/flash',array('token'=>$token))}">商城背景与轮播图</a></li>
-	<li class="tabli" id="tab8"><a href="{pigcms::U('Store/twitter',array('token'=>$token))}">商城分佣管理</a></li>
-</ul>
-</div>
+<include file="Store:menu"/>
 <!--tab end-->
 <div class="msgWrap">
 <form method="post" action="" id="info">

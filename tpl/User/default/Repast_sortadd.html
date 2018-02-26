@@ -17,26 +17,11 @@ function chg_catid(catid) {
 	</div> 
 <form method="post" action="" id="formID">
 <input type="hidden" name="id" value="{pigcms:$tableData.id}" />
+<input type="hidden" name="catid" value="{pigcms:$tableData.catid}" />
 <input type="hidden" name="cid" id="cid" value="{pigcms:$cid}" />
     <div class="msgWrap bgfc"> 
      <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
       <tbody> 
-	  <tr> 
-        <th><span class="red">*</span>店面选择：</th> 
-        <td>  <select name="catid" style="width:400px; height:26px" onchange="chg_catid(this.value)" >
-         <volist name="Companys" id="t">
-        <option  value="{pigcms:$t.id}" <if condition="$tableData['catid'] eq $t['id']">selected</if>>{pigcms:$t.name}</option>
-        </volist>
-        </select> </td> 
-       </tr>
-    <!--    <tr> 
-        <th><span class="red">*</span>时段类型：</th> 
-        <td>  <select name="datetype" style="width:100px; height:26px"  >
-         <volist name="datetypelist" id="t">
-        <option  value="{pigcms:$t.datetype}" <if condition="$tableData['datetype'] eq $t['datetype']">selected</if>>{pigcms:$t.name}</option>
-        </volist>
-        </select> </td> 
-       </tr>-->
        <tr> 
         <th><span class="red">*</span>分类名称：</th> 
         <td>

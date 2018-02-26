@@ -18,24 +18,21 @@ function chg_catid(catid) {
 </script>
 <div class="content"> 
 	<div class="cLineB"> 
-		<h4>项目设置</h4> 
+		<h4>游戏币设置</h4> 
 		<a href="{pigcms::U('Repast/dish',array('token' => $token,'cid'=>$cid))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
 	</div> 
 	<!--tab start-->
 <div class="tab">
 <ul>
-<if condition="$ischild neq 1"> <li class="tabli" id="tab0"><a href="{pigcms::U('Repast/company_index', array('token' => $token,'cid' => $cid))}">店面管理</a></li></if>
 <li class="tabli" id="tab2"><a href="{pigcms::U('Repast/sort', array('token' => $token,'cid' => $cid))}">分类管理</a></li>
-<li class="current tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">预约管理</a></li>
-<li class="tabli" id="tab4"><a href="{pigcms::U('Repast/dishpak', array('token' => $token,'cid' => $cid))}">套餐管理</a></li>
-<li class="tabli" id="tab5"><a href="{pigcms::U('Repast/orders', array('token' => $token,'cid' => $cid))}">订单管理</a></li>
+<li class="current tabli" id="tab3"><a href="{pigcms::U('Repast/dish', array('token' => $token,'cid' => $cid))}">游戏币列表</a></li>
 <li class="tabli" id="tab6"><a href="{pigcms::U('Repast/payrecord', array('token' => $token,'cid' => $cid))}">交易记录</a></li>
-<li class="tabli" id="tab6"><a href="{pigcms::U('Repast/taorecord', array('token' => $token,'cid' => $cid))}">套餐记录</a></li>
 </ul>
 </div>
 <!--tab end-->
 <form method="post" action="" id="formID">
 <input type="hidden" name="id" value="{pigcms:$tableData.id}" />
+<input type="hidden" name="catid" value="{pigcms:$tableData.catid}" />
 <input type="hidden" name="cid" id="cid" value="{pigcms:$cid}" />
 <script>
 function chg_datetype(datetypeid) {
@@ -49,119 +46,28 @@ chg_datetype({pigcms:$tableData['datetype']});
     <div class="msgWrap bgfc"> 
      <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
       <tbody>
-	  <tr> 
-        <th><span class="red">*</span>店面选择：</th> 
-        <td>  <select name="catid" style="width:400px; height:26px" onchange="chg_catid(this.value)" >
-         <volist name="Companys" id="t">
-        <option  value="{pigcms:$t.id}" <if condition="$tableData['catid'] eq $t['id']">selected</if>>{pigcms:$t.name}</option>
-        </volist>
-        </select> </td> 
-       </tr>
        <tr> 
         <th><span class="red">*</span>名称：</th> 
         <td>
         <input type="text" name="name" id="name" value="{pigcms:$tableData.name}" class="px" style="width:400px;" />
         </td> 
        </tr>
-         <tr> 
-        <th><span class="red">*</span>时段类型：</th> 
-        <td> <if condition="$tableData[id] neq ''"> 
-        <input type="hidden" name="datetype" id="datetype" value="{pigcms:$tableData[datetype]}" class="px"  readonly="true" style="width:50px;" />
-        <if condition='$tableData[datetype] eq 1 '>多时段 <else />单时段</if>
-        <else/>
-        <select name="datetype" style="width:100px; height:26px"  onchange="chg_datetype(this.value)" >
-         <volist name="datetypelist" id="t">
-        <option  value="{pigcms:$t.datetype}" <if condition="$tableData['datetype'] eq $t['datetype']">selected</if>>{pigcms:$t.name}</option>
-        </volist>
-        </select>
-        </if>
-          </td> 
+        <tr> 
+        <th><span class="red">&nbsp;</span>说明：</th> 
+        <td><input type="text" id="des" name="des" class="px" value="{pigcms:$tableData.des}" style="width:400px;"/></td> 
+       </tr>
+        <tr> 
+        <tr> 
+        <th><span class="red">*</span>数量：</th> 
+        <td>
+        <input type="text" name="coin_num" id="coin_num" value="{pigcms:$tableData['coin_num']}" class="px" style="width:100px;" />&nbsp;个币
+        </td> 
        </tr>
        <tr> 
-        <th><span class="red">*</span>时间设置：</th> 
+        <tr> 
+        <th><span class="red">*</span>价格：</th> 
         <td>
-        <table class="userinfoArea dtcss" <if condition="$tableData[datetype] eq 2"> style="display:none;" </if> border="0" cellspacing="0" cellpadding="0" width="100%"> 
-        <thead  class="field">
-				<tr>
-					<th>时间</th>
-                    <th>数量(今日)</th>
-                    <th>已约(今日)</th>
-                     <th>价格(今日)</th>
-                     <th></th>
-					<th>数量(明日)</th>
-                     <th>已约(明日)</th>
-                    <th>价格(明日)</th>
-				</tr>
-		</thead>
-      <tbody> 
-      <volist name="dishTime" id="timelist"> 
-	  <tr> 
-       <th>{pigcms:$timelist.timezone}</th> 
-         <input type='hidden' name="_spec_array[{pigcms:$i}]" value='{pigcms:$timelist.timezone}' />
-        <td>
-          <input type="text" name="num{pigcms:$zonetype.t1}[{pigcms:$i}]" id="num{pigcms:$zonetype.t1}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['num1']:$timelist['num2']}" class="px" style="width:40px;" />
-        </td> 
-        <td>
-          <input type="text" name="ordernum{pigcms:$zonetype.t1}[{pigcms:$i}]" id="ordernum{pigcms:$zonetype.t1}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['ordernum1']:$timelist['ordernum2']}" readonly class="px" style="width:40px;" />
-        </td>
-         <td>
-           <input type="text" name="price{pigcms:$zonetype.t1}[{pigcms:$i}]" id="price{pigcms:$zonetype.t1}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['price1']:$timelist['price2']}" class="px" style="width:40px;" /> 元
-        </td>
-         <td></td>
-        <td>
-          <input type="text" name="num{pigcms:$zonetype.t2}[{pigcms:$i}]" id="num{pigcms:$zonetype.t2}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['num2']:$timelist['num1']}" class="px" style="width:40px;" />
-        </td>
-        <td>
-          <input type="text" name="ordernum{pigcms:$zonetype.t2}[{pigcms:$i}]" id="ordernum{pigcms:$zonetype.t2}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['ordernum2']:$timelist['ordernum1']}" readonly class="px" style="width:40px;" />
-        </td>
-        <td>
-          <input type="text" name="price{pigcms:$zonetype.t2}[{pigcms:$i}]" id="price{pigcms:$zonetype.t2}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['price2']:$timelist['price1']}" class="px" style="width:40px;" /> 元
-        </td> 
-       </tr> 
-       </volist>
-      </tbody> 
-     </table>
-      <table class="userinfoArea  dtcss" <if condition="($tableData[datetype] eq 1) OR ($tableData[datetype] eq '')"> style="display:none;" </if> border="0" cellspacing="0" cellpadding="0" width="100%"> 
-        <thead  class="field">
-				<tr>
-					<th>时间</th>
-                    <th>数量(今日)</th>
-                    <th>已约(今日)</th>
-                     <th>价格(今日)</th>
-                     <th></th>
-					<th>数量(明日)</th>
-                     <th>已约(明日)</th>
-                    <th>价格(明日)</th>
-				</tr>
-		</thead>
-      <tbody> 
-        <volist name="dishTime2" id="timelist"> 
-	  <tr> 
-       <th><if condition="$timelist.timezone eq '12:00'">上午 <else />下午</if></th> 
-         <input type='hidden' name="_spec_array2[{pigcms:$i}]" value='{pigcms:$timelist.timezone}' />
-        <td>
-          <input type="text" name="2num{pigcms:$zonetype.t1}[{pigcms:$i}]" id="2num{pigcms:$zonetype.t1}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['num1']:$timelist['num2']}" class="px" style="width:40px;" />
-        </td> 
-        <td>
-          <input type="text" name="2ordernum{pigcms:$zonetype.t1}[{pigcms:$i}]" id="2ordernum{pigcms:$zonetype.t1}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['ordernum1']:$timelist['ordernum2']}" readonly class="px" style="width:40px;" />
-        </td>
-         <td>
-           <input type="text" name="2price{pigcms:$zonetype.t1}[{pigcms:$i}]" id="2price{pigcms:$zonetype.t1}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['price1']:$timelist['price2']}" class="px" style="width:40px;" /> 元
-        </td>
-         <td></td>
-        <td>
-          <input type="text" name="2num{pigcms:$zonetype.t2}[{pigcms:$i}]" id="2num{pigcms:$zonetype.t2}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['num2']:$timelist['num1']}" class="px" style="width:40px;" />
-        </td>
-        <td>
-          <input type="text" name="2ordernum{pigcms:$zonetype.t2}[{pigcms:$i}]" id="2ordernum{pigcms:$zonetype.t2}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['ordernum2']:$timelist['ordernum1']}" readonly class="px" style="width:40px;" />
-        </td>
-        <td>
-          <input type="text" name="2price{pigcms:$zonetype.t2}[{pigcms:$i}]" id="2price{pigcms:$zonetype.t2}[{pigcms:$i}]" value="{pigcms:$zonetype['t1']==1?$timelist['price2']:$timelist['price1']}" class="px" style="width:40px;" /> 元
-        </td> 
-       </tr> 
-       </volist>
-      </tbody> 
-     </table>
+        <input type="text" name="price" id="price" value="{pigcms:$tableData['price']}" class="px" style="width:100px;" />&nbsp;元
         </td> 
        </tr>
         <tr> 
@@ -170,10 +76,10 @@ chg_datetype({pigcms:$tableData['datetype']});
         <input type="text" name="lprice" id="lprice" value="{pigcms:$tableData['lprice']}" class="px" style="width:100px;" />&nbsp;元
         </td> 
        </tr>
-       <tr> 
+       <tr style="display:none;"> 
         <th><span class="red">*</span>计量单位：</th> 
         <td>
-        <input type="text" name="unit" id="unit" value="{pigcms:$tableData.unit}" class="px" style="width:100px;" /> (如：个，次)
+        <input type="text" name="unit" id="unit" value="{pigcms:$tableData.unit|default="个"}" class="px" style="width:100px;" /> (如：个，次)
         </td> 
        </tr>
        <tr> 
@@ -198,21 +104,11 @@ chg_datetype({pigcms:$tableData['datetype']});
         <input type="checkbox" name="isopen" id="isopen" value="1" <if condition="$tableData['isopen'] eq 1">checked</if> />
         </td> 
        </tr>
-           <tr> 
-        <th>是否立即支付：</th> 
-        <td>
-        <input type="checkbox" name="ispaynow" id="ispaynow" value="1" <if condition="$tableData['ispaynow'] eq 1">checked</if> />
-        </td> 
-       </tr>
        <tr> 
-        <th>展示图片：</th>
+        <th>图片：</th>
         <td><input type="text" name="image" value="{pigcms:$tableData.image}" class="px" id="pic" style="width:400px;" />  <script src="/tpl/static/upyun.js"></script><a href="###" onclick="upyunPicUpload('pic',700,700,'{pigcms:$token}')" class="a_upload">上传</a> <a href="###" onclick="viewImg('pic')">预览</a></td> 
        </tr>
-       <tr> 
-        <th>描述：</th> 
-        <td><textarea name="des" class="px" style="width:400px;height:80px;">{pigcms:$tableData.des}</textarea></td> 
-       </tr>
-       <tr> 
+   		<tr>
         <th>排序：</th> 
         <td><input type="text" id="sort" name="sort" value="{pigcms:$tableData.sort}" class="px" style="width:50px;" />  数字越小排在越前（大于等于0的整数）</td> 
        </tr>

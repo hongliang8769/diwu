@@ -13,9 +13,9 @@ class BaseAction extends Action{
 	public $isQcloud = false;
 	protected function _initialize(){
 		//检测电脑PC版
-		if(GROUP_NAME == 'Home' && MODULE_NAME == 'Index' && ACTION_NAME == 'index'){
-			$this->check_company_website();
-		}
+// 		if(GROUP_NAME == 'Home' && MODULE_NAME == 'Index' && ACTION_NAME == 'index'){
+// 			$this->check_company_website();
+// 		}
 
 		if($this->_get('openId') != NULL){
 			$this->isQcloud = true;
@@ -34,7 +34,7 @@ class BaseAction extends Action{
 			$staticPath='';
 		}
 		$this->assign('staticPath',$staticPath);
-		define('STATICS',$staticPath.'/tpl/static');		//********************/
+		define('STATICS',$staticPath.'/tpl/static');		
 		$this->isAgent=0;
 		if (C('agent_version')){
 			$thisAgent=M('agent')->where(array('siteurl'=>'http://'.$_SERVER['HTTP_HOST']))->find();
@@ -100,8 +100,7 @@ class BaseAction extends Action{
 		$this->assign('f_regNeedMp',$f_regNeedMp);
 		$this->assign('f_ipc',$f_ipc);
 		$this->assign('reg_validDays',$this->reg_validDays);
-		//******************/
-	        $this -> assign('f_countsz', htmlspecialchars_decode(base64_decode(C('countsz'))));			
+	    $this -> assign('f_countsz', htmlspecialchars_decode(base64_decode(C('countsz'))));			
 	}
 
 	//添加所有内容,包含关键词

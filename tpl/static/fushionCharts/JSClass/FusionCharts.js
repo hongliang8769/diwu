@@ -69,7 +69,8 @@ infosoftglobal.FusionCharts = function(swf, id, w, h, debugMode, registerWithJS,
 	this.autoInstallRedirect = autoInstallRedirect?autoInstallRedirect:1;
 	
 	//Ger Flash Player version 
-	this.installedVer = infosoftglobal.FusionChartsUtil.getPlayerVersion();
+	//this.installedVer = infosoftglobal.FusionChartsUtil.getPlayerVersion();
+	this.installedVer =28;
 	
 	if (!window.opera && document.all && this.installedVer.major > 7) {
 		// Only add the onunload cleanup if the Flash Player version supports External Interface and we are in IE
