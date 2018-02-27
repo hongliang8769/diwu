@@ -2677,7 +2677,14 @@
 			'attr'=>'mix thumb focu bg filt slip',
 			'sort'=>330,
 		),
-		
+        array(
+            'tpltypeid'=>331,
+            'tplview'=>'cate1330.png',
+            'tpltypename'=>'1331_index_n4fb',
+            'tpldesinfo'=>'小图标为正方形300x300px。不支持更换颜色风格',
+            'attr'=>'mix thumb focu bg filt slip',
+            'sort'=>331,
+        ),
 		
 	);
 	
